@@ -1,18 +1,15 @@
-QT       += core gui testlib
+QT += testlib
+QT += gui
+CONFIG += qt warn_on depend_includepath testcase
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-CONFIG += c++11
-
-TARGET = eSST_Test
 TEMPLATE = app
-INCLUDEPATH += $$PWD/../eSST_Gui
-DEPENDPATH += $$PWD/../eSST_Gui
 
-include(./gtest/gtest.pri)
-include(../eSST_Gui/eSST_Gui.pri)
+include(../eSST_Controller_Gui/eSST_Controller_Gui.pri)
 
-SOURCES += main.cpp
+SOURCES +=  \
+    main.cpp \
 
-HEADERS  += \
-    test/ut_test.h
+HEADERS += \
+    ut_timer/ut_chronodowntimer.h \
+    ut_timer/ut_timerformatparser.h \
+    testexec.h
