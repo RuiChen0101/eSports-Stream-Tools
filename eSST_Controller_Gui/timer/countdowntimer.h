@@ -8,6 +8,7 @@
 #include <QTimeZone>
 
 class CountDownTimer : public Timer{
+friend class UtCountDownTimer;
 public:
     enum Status{
         START,

@@ -1,9 +1,11 @@
 #include "chronodowntimer.h"
 
-ChronoDownTimer::ChronoDownTimer(){}
+ChronoDownTimer::ChronoDownTimer(){
+    parser.setDoubleDigit(true);
+}
 
 void ChronoDownTimer::timeUpdate(){
-    if(status == START){
+    if(status == START || status == RESUME){
         remainSec -= remainSec >= 0 ? 1 : 0;
         parser.setSecond(remainSec);
     }
@@ -27,13 +29,13 @@ void ChronoDownTimer::setFormat(QString const &format){
 
 void ChronoDownTimer::setTarget(QTime const &target){
     this->target = target;
-    remainSec = QTime(0, 0, 0).secsTo(target);
 }
 
 void ChronoDownTimer::setStatus(Status stat){
     this->status = stat;
-    if(this->status == STOP){
+    if(this->status == START){
         remainSec = QTime(0, 0, 0).secsTo(target);
+        parser.setSecond(remainSec);
     }
 }
 

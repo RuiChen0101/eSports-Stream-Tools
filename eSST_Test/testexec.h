@@ -5,22 +5,13 @@
 #include <QtTest>
 #include <QString>
 
-class TestExec{
-public:
-    TestExec(QObject *object, QString const &name){
-        object->setObjectName(name);
-        QList<QObject*>& list = testList();
-        if (!TestExec::findObject(object)){
-            list.append(object);
-        }
-    }
-
-    static QList<QObject*>& testList(){
+namespace TestExec{
+    inline QList<QObject*>& testList(){
         static QList<QObject*> list;
         return list;
     }
 
-    static bool findObject(QObject *object){
+    inline bool findObject(QObject *object){
         QList<QObject*>& list = testList();
         if (list.contains(object)){
             return true;
@@ -34,7 +25,7 @@ public:
         return false;
     }
 
-    static int runAllTest(int argc, char *argv[]){
+    inline int runAllTest(int argc, char *argv[]){
         int ret = 0;
         QList<QObject*>& list = testList();
 
@@ -50,6 +41,17 @@ public:
     }
 };
 
-#define ADD_TEST(className) static TestExec t(new className, #className);
+class Test{
+public:
+    Test(QObject *object, QString const &name){
+        object->setObjectName(name);
+        QList<QObject*>& list = TestExec::testList();
+        if (!TestExec::findObject(object)){
+            list.append(object);
+        }
+    }
+};
+
+#define ADD_TEST(className) static Test t(new className, #className);
 
 #endif // TESTEXEC_H

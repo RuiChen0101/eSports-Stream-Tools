@@ -7,9 +7,13 @@ TEMPLATE = app
 include(../eSST_Controller_Gui/eSST_Controller_Gui.pri)
 
 SOURCES +=  \
-    main.cpp \
+    main.cpp
+
+
 
 HEADERS += \
-    ut_timer/ut_chronodowntimer.h \
+    testexec.h \
+    testsetup.h \
+    ut_timer/ut_countdowntimer.h \
     ut_timer/ut_timerformatparser.h \
-    testexec.h
+    ut_timer/ut_chronodowntimer.h

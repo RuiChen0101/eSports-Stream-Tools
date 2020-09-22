@@ -14,7 +14,8 @@ public:
     enum Status{
         START,
         PAUSE,
-        STOP
+        STOP,
+        RESUME
     };
     ChronoDownTimer();
     QString getString() override;

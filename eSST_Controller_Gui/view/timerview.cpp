@@ -58,25 +58,27 @@ void TimerView::countDownStatusUpdate(){
         ui->countdown_start_btn->setEnabled(true);
         ui->countdown_stop_btn->setEnabled(false);
     }
+    ui->countdown_live_output->setText(countDown.getString());
 }
 
 void TimerView::chronoDownStatusUpdate(){
     QString senderName = this->sender()->objectName();
-    if(senderName == ui->chronodown_start_btn->objectName()){
+    if(senderName == ui->chronodown_function_btn->objectName() && ui->chronodown_function_btn->text() == "Start"){
         chronoDown.setStatus(ChronoDownTimer::START);
-        ui->chronodown_start_btn->setEnabled(false);
         ui->chronodown_stop_btn->setEnabled(true);
-        ui->chronodown_pause_btn->setEnabled(true);
+        ui->chronodown_function_btn->setText("Pause");
+    }else if(senderName == ui->chronodown_function_btn->objectName() && ui->chronodown_function_btn->text() == "Pause"){
+        chronoDown.setStatus(ChronoDownTimer::PAUSE);
+        ui->chronodown_function_btn->setText("Resume");
+    }else if(senderName == ui->chronodown_function_btn->objectName() && ui->chronodown_function_btn->text() == "Resume"){
+        chronoDown.setStatus(ChronoDownTimer::RESUME);
+        ui->chronodown_function_btn->setText("Pause");
     }else if(senderName == ui->chronodown_stop_btn->objectName()){
         chronoDown.setStatus(ChronoDownTimer::STOP);
-        ui->chronodown_start_btn->setEnabled(true);
         ui->chronodown_stop_btn->setEnabled(false);
-        ui->chronodown_pause_btn->setEnabled(false);
-    }else if(senderName == ui->chronodown_pause_btn->objectName()){
-        chronoDown.setStatus(ChronoDownTimer::PAUSE);
-        ui->chronodown_start_btn->setEnabled(true);
-        ui->chronodown_pause_btn->setEnabled(false);
+        ui->chronodown_function_btn->setText("Start");
     }
+    ui->chronodown_live_output->setText(chronoDown.getString());
 }
 
 void TimerView::reset(){
@@ -110,9 +112,8 @@ void TimerView::connectSignal(){
     connect(ui->countdown_start_btn, SIGNAL(clicked(bool)), this, SLOT(countDownStatusUpdate()));
     connect(ui->countdown_stop_btn, SIGNAL(clicked(bool)), this, SLOT(countDownStatusUpdate()));
 
-    connect(ui->chronodown_start_btn, SIGNAL(clicked(bool)), this, SLOT(chronoDownStatusUpdate()));
+    connect(ui->chronodown_function_btn, SIGNAL(clicked(bool)), this, SLOT(chronoDownStatusUpdate()));
     connect(ui->chronodown_stop_btn, SIGNAL(clicked(bool)), this, SLOT(chronoDownStatusUpdate()));
-    connect(ui->chronodown_pause_btn, SIGNAL(clicked(bool)), this, SLOT(chronoDownStatusUpdate()));
 
     connect(ui->countdown_formate_edit_reset, SIGNAL(clicked(bool)), this, SLOT(reset()));
     connect(ui->countdown_target_reset, SIGNAL(clicked(bool)), this, SLOT(reset()));
