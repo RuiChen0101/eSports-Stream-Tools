@@ -1,11 +1,13 @@
-#include "timerview.h"
-#include "ui_timerview.h"
+#include "timer_view.h"
+#include "ui_timer_view.h"
+#include "file/file_manager.h"
 #include "utility/timetick.h"
 
 TimerView::TimerView(QWidget *parent) :
     QWidget(parent), ui(new Ui::TimerView){
     ui->setupUi(this);
     connectSignal();
+    registeOutputFile();
     ui->countdown_target->setDateTime(QDateTime::currentDateTime());
     dateTimeSettingUpdate();
     countDownSettingUpdate();
@@ -18,20 +20,20 @@ TimerView::~TimerView(){
 
 void TimerView::timeUpdate(){
     dateTime.timeUpdate();
-    countDown.timeUpdate();
+    countdown.timeUpdate();
     chronoDown.timeUpdate();
     ui->datetime_live_output->setText(dateTime.getString());
-    ui->countdown_live_output->setText(countDown.getString());
+    ui->countdown_live_output->setText(countdown.getString());
     ui->chronodown_live_output->setText(chronoDown.getString());
 }
 
 
 void TimerView::countDownSettingUpdate(){
-    countDown.setTarget(ui->countdown_target->dateTime());
-    countDown.setFormat(ui->countdown_formate_edit->text());
-    countDown.setTimeoutMsg(ui->countdown_timeout_msg_edit->text());
-    countDown.setDoubleDigit(ui->countdown_double_digit_check->isChecked());
-    ui->countdown_live_output->setText(countDown.getString());
+    countdown.setTarget(ui->countdown_target->dateTime());
+    countdown.setFormat(ui->countdown_formate_edit->text());
+    countdown.setTimeoutMsg(ui->countdown_timeout_msg_edit->text());
+    countdown.setDoubleDigit(ui->countdown_double_digit_check->isChecked());
+    ui->countdown_live_output->setText(countdown.getString());
 }
 
 void TimerView::chronoDownSettingUpdate(){
@@ -50,15 +52,15 @@ void TimerView::dateTimeSettingUpdate(){
 void TimerView::countDownStatusUpdate(){
     QString senderName = this->sender()->objectName();
     if(senderName == ui->countdown_start_btn->objectName()){
-        countDown.setStatus(CountDownTimer::START);
+        countdown.setStatus(CountDownTimer::START);
         ui->countdown_start_btn->setEnabled(false);
         ui->countdown_stop_btn->setEnabled(true);
     }else if(senderName == ui->countdown_stop_btn->objectName()){
-        countDown.setStatus(CountDownTimer::STOP);
+        countdown.setStatus(CountDownTimer::STOP);
         ui->countdown_start_btn->setEnabled(true);
         ui->countdown_stop_btn->setEnabled(false);
     }
-    ui->countdown_live_output->setText(countDown.getString());
+    ui->countdown_live_output->setText(countdown.getString());
 }
 
 void TimerView::chronoDownStatusUpdate(){
@@ -94,6 +96,15 @@ void TimerView::reset(){
     }
 }
 
+void TimerView::flexOutputSelectChange(int index){
+    QString senderName = this->sender()->objectName();
+    if(senderName == ui->flex_output1_select->objectName()){
+        registeFlexOutputFile(index, "FlexOutput1.txt");
+    }else if(senderName == ui->flex_output2_select->objectName()){
+        registeFlexOutputFile(index, "FlexOutput2.txt");
+    }
+}
+
 void TimerView::connectSignal(){
     connect(TimeTick::inst(), SIGNAL(timeUpdate()), this, SLOT(timeUpdate()));
 
@@ -119,4 +130,36 @@ void TimerView::connectSignal(){
     connect(ui->countdown_target_reset, SIGNAL(clicked(bool)), this, SLOT(reset()));
     connect(ui->chronodown_formate_edit_reset, SIGNAL(clicked(bool)), this, SLOT(reset()));
     connect(ui->chronodown_target_reset, SIGNAL(clicked(bool)), this, SLOT(reset()));
+
+    connect(ui->flex_output1_select, SIGNAL(currentIndexChanged(int)), this, SLOT(flexOutputSelectChange(int)));
+    connect(ui->flex_output2_select, SIGNAL(currentIndexChanged(int)), this, SLOT(flexOutputSelectChange(int)));
+}
+
+void TimerView::registeOutputFile(){
+    QString dateTimeFilePath = FileManager::inst()->registeTextFile(&dateTime, "DateTime.txt");
+    QString countdownFilePath = FileManager::inst()->registeTextFile(&countdown, "Countdown.txt");
+    QString chronoDownFilePath = FileManager::inst()->registeTextFile(&chronoDown, "ChronoDown.txt");
+    QString flex1FilePath = registeFlexOutputFile(ui->flex_output1_select->currentIndex(), "FlexOutput1.txt");
+    QString flex2FilePath = registeFlexOutputFile(ui->flex_output2_select->currentIndex(), "FlexOutput2.txt");
+    ui->datetime_output_file->setText(dateTimeFilePath);
+    ui->countdown_output_file->setText(countdownFilePath);
+    ui->chronodown_output_file->setText(chronoDownFilePath);
+    ui->flex_output1_file->setText(flex1FilePath);
+    ui->flex_output2_file->setText(flex2FilePath);
+}
+
+QString TimerView::registeFlexOutputFile(int index, QString const &fileName){
+    QString filePath;
+    switch (index) {
+    case 0:
+        filePath = FileManager::inst()->registeTextFile(&dateTime, fileName);
+        break;
+    case 1:
+        filePath = FileManager::inst()->registeTextFile(&countdown, fileName);
+        break;
+    case 2:
+        filePath = FileManager::inst()->registeTextFile(&chronoDown, fileName);
+        break;
+    }
+    return filePath;
 }

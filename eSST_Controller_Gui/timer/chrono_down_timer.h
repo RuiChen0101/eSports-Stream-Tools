@@ -2,12 +2,14 @@
 #define CHRONODOWNTIMER_H
 
 #include "timer.h"
-#include "timerformatparser.h"
+#include "timer_format_parser.h"
+
+#include "file/file_source.h"
 
 #include <QTime>
 #include <QDebug>
 
-class ChronoDownTimer : public Timer{
+class ChronoDownTimer : public Timer, public FileSource{
 friend class UtChronoDownTimer;
 
 public:
@@ -19,7 +21,8 @@ public:
     };
     ChronoDownTimer();
     QString getString() override;
-    void setFormat(QString const &) override;
+    bool isOutputing() const override;
+    void setFormat(QString const &);
     void setTarget(QTime const &);
     void setStatus(Status);
     void setTimeoutMsg(QString const &);

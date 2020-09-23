@@ -1,9 +1,9 @@
 #ifndef TIMERVIEW_H
 #define TIMERVIEW_H
 
-#include "timer/datetimetimer.h"
-#include "timer/countdowntimer.h"
-#include "timer/chronodowntimer.h"
+#include "timer/date_time_timer.h"
+#include "timer/countdown_timer.h"
+#include "timer/chrono_down_timer.h"
 
 #include <QDebug>
 #include <QWidget>
@@ -25,12 +25,15 @@ private slots:
     void dateTimeSettingUpdate();
     void countDownStatusUpdate();
     void chronoDownStatusUpdate();
+    void flexOutputSelectChange(int);
     void reset();
 private:
     void connectSignal();
+    void registeOutputFile();
+    QString registeFlexOutputFile(int, QString const &);
     Ui::TimerView *ui;
     DateTimeTimer dateTime;
-    CountDownTimer countDown;
+    CountDownTimer countdown;
     ChronoDownTimer chronoDown;
 };
 

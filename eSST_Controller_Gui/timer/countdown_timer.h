@@ -2,12 +2,14 @@
 #define COUNTDOWNTIMER_H
 
 #include "timer.h"
-#include "timerformatparser.h"
+#include "timer_format_parser.h"
+
+#include "file/file_source.h"
 
 #include <QDateTime>
 #include <QTimeZone>
 
-class CountDownTimer : public Timer{
+class CountDownTimer : public Timer, public FileSource{
 friend class UtCountDownTimer;
 public:
     enum Status{
@@ -16,7 +18,8 @@ public:
     };
     CountDownTimer();
     QString getString() override;
-    void setFormat(QString const &) override;
+    bool isOutputing() const override;
+    void setFormat(QString const &);
     void setTarget(QDateTime const &);
     void setStatus(Status);
     void setTimeoutMsg(QString const &);

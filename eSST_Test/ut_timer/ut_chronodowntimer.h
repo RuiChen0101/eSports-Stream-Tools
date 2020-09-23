@@ -1,7 +1,7 @@
 #include <QtTest>
 #include "testexec.h"
 
-#include "timer/chronodowntimer.h"
+#include "timer/chrono_down_timer.h"
 
 class UtChronoDownTimer : public QObject{
     Q_OBJECT
@@ -17,6 +17,17 @@ private slots:
         ChronoDownTimer timer;
         timer.setFormat("TEST");
         QCOMPARE(timer.parser.getString(), "TEST");
+    }
+
+    void isOutputing_test(){
+        ChronoDownTimer timer;
+        QVERIFY(!timer.isOutputing());
+        timer.setStatus(ChronoDownTimer::START);
+        QVERIFY(timer.isOutputing());
+        timer.setStatus(ChronoDownTimer::RESUME);
+        QVERIFY(timer.isOutputing());
+        timer.setStatus(ChronoDownTimer::PAUSE);
+        QVERIFY(timer.isOutputing());
     }
 
     void start_chrono_and_update_time_test(){

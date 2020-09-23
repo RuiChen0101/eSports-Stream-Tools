@@ -7,8 +7,11 @@
 class FileSource : public QObject{
     Q_OBJECT
 public:
-    explicit FileSource(QObject *parent = nullptr);
+    FileSource(QObject *parent = nullptr);
     virtual QString getString() = 0;
+    virtual bool isOutputing() const = 0;
+signals:
+    void contentUpdate();
 };
 
 #endif // FILESOURCE_H

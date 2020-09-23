@@ -1,12 +1,15 @@
-#include "countdowntimer.h"
+#include "countdown_timer.h"
 
 CountDownTimer::CountDownTimer(){
     parser.setDoubleDigit(true);
 }
 
 void CountDownTimer::timeUpdate(){
-    remainSec -= remainSec >= 0 ? 1 : 0;
-    parser.setSecond(remainSec);
+    if(status == START){
+        remainSec -= remainSec >= 0 ? 1 : 0;
+        parser.setSecond(remainSec);
+        contentUpdate();
+    }
 }
 
 QString CountDownTimer::getString(){
@@ -19,6 +22,10 @@ QString CountDownTimer::getString(){
     }else{
         return "";
     }
+}
+
+bool CountDownTimer::isOutputing() const{
+    return status != STOP;
 }
 
 void CountDownTimer::setFormat(QString const &format){
@@ -36,6 +43,7 @@ void CountDownTimer::setStatus(Status stat){
     if(status == START){
         parser.setSecond(remainSec);
     }
+    contentUpdate();
 }
 
 void CountDownTimer::setTimeoutMsg(QString const &msg){

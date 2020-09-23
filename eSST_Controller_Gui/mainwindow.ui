@@ -99,8 +99,18 @@
    </property>
    <widget class="QMenu" name="menu_file">
     <property name="styleSheet">
-     <string notr="true">QMenu::item:selected {
-	background-color: rgb(52,73,94);
+     <string notr="true">QMenu {
+    background-color: white;
+}
+
+QMenu::item{
+	padding: 2px 25px 2px 20px;
+}
+
+QMenu::item:selected {
+	color:rgb(0, 0, 0);
+	background-color: rgb(181, 215, 243);
+	border: 1px solid rgb(0, 85, 255)
 }</string>
     </property>
     <property name="title">
@@ -110,16 +120,29 @@
      <bool>false</bool>
     </property>
     <addaction name="action_setting"/>
-    <addaction name="action_show_text_folder"/>
+    <addaction name="action_show_file_folder"/>
    </widget>
    <widget class="QMenu" name="menu_help">
     <property name="styleSheet">
-     <string notr="true">QMenu::item:selected {
-	background-color: rgb(52,73,94);
+     <string notr="true">QMenu {
+    background-color: white;
+}
+
+QMenu::item{
+	padding: 2px 25px 2px 20px;
+}
+
+QMenu::item:selected {
+	color:rgb(0, 0, 0);
+	background-color: rgb(181, 215, 243);
+	border: 1px solid rgb(0, 85, 255)
 }</string>
     </property>
     <property name="title">
      <string>Help</string>
+    </property>
+    <property name="separatorsCollapsible">
+     <bool>false</bool>
     </property>
     <addaction name="action_github_page"/>
    </widget>
@@ -141,9 +164,9 @@
     </font>
    </property>
   </action>
-  <action name="action_show_text_folder">
+  <action name="action_show_file_folder">
    <property name="text">
-    <string>Show Text Folder</string>
+    <string>Show File Folder</string>
    </property>
    <property name="font">
     <font>
@@ -154,6 +177,19 @@
   <action name="action_github_page">
    <property name="text">
     <string>Github page</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WindowShortcut</enum>
+   </property>
+  </action>
+  <action name="action123">
+   <property name="text">
+    <string>123</string>
+   </property>
+  </action>
+  <action name="actionpages">
+   <property name="text">
+    <string>pages</string>
    </property>
   </action>
  </widget>

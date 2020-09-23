@@ -8,31 +8,39 @@ TEMPLATE = app
 CONFIG += c++11
 
 SOURCES += \
-    file/filesource.cpp \
+    file/file.cpp \
+    file/file_manager.cpp \
+    file/file_source.cpp \
     main.cpp \
     mainwindow.cpp \
-    timer/chronodowntimer.cpp \
-    timer/countdowntimer.cpp \
-    timer/datetimetimer.cpp \
+    menubar.cpp \
+    timer/chrono_down_timer.cpp \
+    timer/countdown_timer.cpp \
+    timer/date_time_timer.cpp \
     timer/timer.cpp \
-    timer/timerformatparser.cpp \
+    timer/timer_format_parser.cpp \
+    utility/system_call.cpp \
     utility/timetick.cpp \
-    view/timerview.cpp
+    view/timer_view.cpp
 
 HEADERS += \
-    file/filesource.h \
+    file/file.h \
+    file/file_manager.h \
+    file/file_source.h \
     mainwindow.h \
-    timer/chronodowntimer.h \
-    timer/countdowntimer.h \
-    timer/datetimetimer.h \
+    menubar.h \
+    timer/chrono_down_timer.h \
+    timer/countdown_timer.h \
+    timer/date_time_timer.h \
     timer/timer.h \
-    timer/timerformatparser.h \
+    timer/timer_format_parser.h \
+    utility/system_call.h \
     utility/timetick.h \
-    view/timerview.h
+    view/timer_view.h
 
 FORMS += \
     mainwindow.ui \
-    view/timerview.ui
+    view/timer_view.ui
 
 DISTFILES += \
     eSST_Controller_Gui.pri

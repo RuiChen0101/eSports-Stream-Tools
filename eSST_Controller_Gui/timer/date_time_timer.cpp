@@ -1,8 +1,10 @@
-#include "datetimetimer.h"
+#include "date_time_timer.h"
 
 DateTimeTimer::DateTimeTimer(QString const &format):
-    format(format){
+    format(format){}
 
+bool DateTimeTimer::isOutputing() const{
+    return true;
 }
 
 void DateTimeTimer::setFormat(QString const &format){
@@ -15,4 +17,5 @@ QString DateTimeTimer::getString(){
 
 void DateTimeTimer::timeUpdate(){
     currentTime = QDateTime::currentDateTime();
+    contentUpdate();
 }

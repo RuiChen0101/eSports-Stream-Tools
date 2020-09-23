@@ -1,7 +1,7 @@
 #include <QtTest>
 #include "testexec.h"
 
-#include "timer/timerformatparser.h"
+#include "timer/timer_format_parser.h"
 
 class UtTimerFormatParser : public QObject{
     Q_OBJECT
@@ -68,6 +68,13 @@ private slots:
         parser.setFormat("$s:$m:$h:$d $d:$h:$m:$s");
         parser.setSecond(93784);
         QCOMPARE(parser.getString(), "04:03:02:01 01:02:03:04");
+    }
+
+    void getString_mixing_test(){
+        TimerFormatParser parser;
+        parser.setFormat("$dA$hB$mC$s");
+        parser.setSecond(93784);
+        QCOMPARE(parser.getString(), "1A2B3C4");
     }
 };
 

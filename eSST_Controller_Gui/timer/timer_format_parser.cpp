@@ -1,4 +1,4 @@
-#include "timerformatparser.h"
+#include "timer_format_parser.h"
 
 void StTimeUnit::fromSecond(qint64 time){
     this->sec = time % 60;

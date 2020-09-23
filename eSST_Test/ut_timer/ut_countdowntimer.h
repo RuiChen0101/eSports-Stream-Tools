@@ -2,22 +2,23 @@
 #include <QDateTime>
 #include "testexec.h"
 
-#include "timer/countdowntimer.h"
+#include "timer/countdown_timer.h"
 
 class UtCountDownTimer : public QObject{
     Q_OBJECT
 
 private slots:
-    void setTarget_and_remainSec_test(){
-        CountDownTimer timer;
-        timer.setTarget(QDateTime::currentDateTime().addSecs(62));
-        QCOMPARE(timer.remainSec, 61);
-    }
-
     void setFormat_test(){
         CountDownTimer timer;
         timer.setFormat("TEST");
         QCOMPARE(timer.parser.getString(), "TEST");
+    }
+
+    void isOutputing_test(){
+        CountDownTimer timer;
+        QVERIFY(!timer.isOutputing());
+        timer.setStatus(CountDownTimer::START);
+        QVERIFY(timer.isOutputing());
     }
 
     void start_countdown_and_update_time_test(){

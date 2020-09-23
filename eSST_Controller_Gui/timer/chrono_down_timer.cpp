@@ -1,4 +1,4 @@
-#include "chronodowntimer.h"
+#include "chrono_down_timer.h"
 
 ChronoDownTimer::ChronoDownTimer(){
     parser.setDoubleDigit(true);
@@ -8,6 +8,7 @@ void ChronoDownTimer::timeUpdate(){
     if(status == START || status == RESUME){
         remainSec -= remainSec >= 0 ? 1 : 0;
         parser.setSecond(remainSec);
+        contentUpdate();
     }
 }
 
@@ -21,6 +22,10 @@ QString ChronoDownTimer::getString(){
     }else{
         return "";
     }
+}
+
+bool ChronoDownTimer::isOutputing() const{
+    return status != STOP;
 }
 
 void ChronoDownTimer::setFormat(QString const &format){
@@ -37,6 +42,7 @@ void ChronoDownTimer::setStatus(Status stat){
         remainSec = QTime(0, 0, 0).secsTo(target);
         parser.setSecond(remainSec);
     }
+    contentUpdate();
 }
 
 void ChronoDownTimer::setTimeoutMsg(QString const &msg){

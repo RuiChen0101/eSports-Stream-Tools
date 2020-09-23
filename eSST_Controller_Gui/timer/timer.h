@@ -7,9 +7,7 @@
 class Timer : public QObject{
     Q_OBJECT
 public:
-    explicit Timer(QObject *parent = nullptr);
-    virtual ~Timer();
-    virtual void setFormat(QString const &) = 0;
+    Timer(QObject *parent = nullptr);
     virtual QString getString() = 0;
     virtual void timeUpdate() = 0;
 };

@@ -1,7 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "view/timerview.h"
+#include "menubar.h"
+
+#include "view/timer_view.h"
 
 #include <QMainWindow>
 
@@ -9,8 +11,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow{
     Q_OBJECT
 
 public:
@@ -18,6 +19,8 @@ public:
     ~MainWindow();
 
 private:
+    void connectSignal();
     Ui::MainWindow *ui;
+    MenuBar *menuBar;
 };
 #endif // MAINWINDOW_H
