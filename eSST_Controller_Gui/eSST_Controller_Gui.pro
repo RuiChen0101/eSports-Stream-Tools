@@ -21,6 +21,7 @@ SOURCES += \
     timer/timer_format_parser.cpp \
     utility/system_call.cpp \
     utility/timetick.cpp \
+    view/score_board_view.cpp \
     view/timer_view.cpp
 
 HEADERS += \
@@ -36,10 +37,12 @@ HEADERS += \
     timer/timer_format_parser.h \
     utility/system_call.h \
     utility/timetick.h \
+    view/score_board_view.h \
     view/timer_view.h
 
 FORMS += \
     mainwindow.ui \
+    view/score_board_view.ui \
     view/timer_view.ui
 
 DISTFILES += \

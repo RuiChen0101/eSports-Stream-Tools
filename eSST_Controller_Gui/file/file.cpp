@@ -25,7 +25,6 @@ void File::fileUpdate(){
     }else{
         file.resize(0);
     }
-    qDebug() << file.isOpen();
 }
 
 QString File::getFilePath() const{
