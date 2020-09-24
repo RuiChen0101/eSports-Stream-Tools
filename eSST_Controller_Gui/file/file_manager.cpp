@@ -5,20 +5,20 @@ FileManager* FileManager::inst(){
     return &Inst;
 }
 
-FileManager::~FileManager(){
-    QList<File*> values = files.values();
-    foreach(File *value, values) {
-        delete value;
-    }
-    files.clear();
-}
-
 FileManager::FileManager(QObject *parent):
     QObject(parent){
     textFileDir.setPath(QDir::currentPath() + "/TextFiles");
     confileFileDir.setPath(QDir::currentPath() + "/ConfigFiles");
     prepareFolder(textFileDir);
     prepareFolder(confileFileDir);
+}
+
+FileManager::~FileManager(){
+    QList<File*> values = files.values();
+    foreach(File *value, values) {
+        delete value;
+    }
+    files.clear();
 }
 
 QDir FileManager::getTextFileDir() const{
@@ -40,7 +40,7 @@ QString FileManager::registeTextFile(FileSource *source, QString const &fileName
     }
 }
 
-void FileManager::deregisteTextFile(QString  const &fileName){
+void FileManager::deregisteTextFile(QString const &fileName){
     if(files.contains(fileName)){
         delete files[fileName];
         files.remove(fileName);

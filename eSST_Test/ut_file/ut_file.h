@@ -5,6 +5,7 @@
 #include "fake_file_source.h"
 
 #include <QDir>
+#include <QFile>
 
 class UtFile : public QObject{
     Q_OBJECT
@@ -36,6 +37,18 @@ private slots:
         source.setOutputing(true);
         File file(&source, testFilePath);
         QCOMPARE(file.readAll(), "test");
+    }
+
+    void destructor_test(){
+        {
+            FakeFileSource source;
+            source.setString("test");
+            source.setOutputing(true);
+            File file(&source, testFilePath);
+            QCOMPARE(file.readAll(), "test");
+        }
+        QFile file(testFolder.filePath(testFile));
+        QCOMPARE(file.size(), 0);
     }
 
     void getFilePath_test(){
@@ -70,6 +83,12 @@ private slots:
     void cleanup(){
         if(testFolder.exists(testFile)){
             testFolder.remove(testFile);
+        }
+    }
+
+    void cleanupTestCase(){
+        if(testFolder.exists()){
+            testFolder.rmdir(".");
         }
     }
 private:

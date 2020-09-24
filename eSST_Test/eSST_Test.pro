@@ -17,6 +17,7 @@ HEADERS += \
     testsetup.h \
     ut_file/fake_file_source.h \
     ut_file/ut_file.h \
+    ut_file/ut_file_manager.h \
     ut_timer/ut_countdowntimer.h \
     ut_timer/ut_datetimetimer.h \
     ut_timer/ut_timerformatparser.h \

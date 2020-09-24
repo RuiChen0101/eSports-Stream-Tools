@@ -19,13 +19,13 @@ File::~File(){
 }
 
 void File::fileUpdate(){
-    if(file.isOpen()) file.close();
     if(source->isOutputing() && file.open(QIODevice::WriteOnly | QFile::Truncate)){
         file.write(source->getString().toUtf8());
         file.close();
     }else{
         file.resize(0);
     }
+    qDebug() << file.isOpen();
 }
 
 QString File::getFilePath() const{
@@ -44,5 +44,7 @@ QString File::readAll(){
         throw std::runtime_error("file " + path.toUtf8() + " open fail");
     }
     QTextStream inStream(&file);
-    return inStream.readAll();
+    QString result = inStream.readAll();
+    file.close();
+    return result;
 }

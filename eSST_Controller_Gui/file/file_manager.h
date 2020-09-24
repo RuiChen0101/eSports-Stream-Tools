@@ -11,6 +11,7 @@
 
 class FileManager : public QObject{
     Q_OBJECT
+friend class UtFileManager;
 public:
     static FileManager* inst();
     ~FileManager();
