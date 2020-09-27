@@ -10,12 +10,9 @@ class UtFileManager : public QObject{
     Q_OBJECT
 
 private slots:
-    void initTestCase(){
-        textFolder = manager.getTextFileDir();
-    }
-
     void constructor_test(){
-        QVERIFY(manager.getTextFileDir().exists());
+        QVERIFY(manager.getTimerFileDir().exists());
+        QVERIFY(manager.getScoreFileDir().exists());
         QVERIFY(manager.getConfigFileDir().exists());
     }
 
@@ -25,42 +22,72 @@ private slots:
         QVERIFY(dir.exists());
     }
 
-    void registeTextFile_and_change_source_test(){
+    void registeFile_and_change_source_test(){
         FakeFileSource source1;
         source1.setString("test");
         source1.setOutputing(true);
         FakeFileSource source2;
         source2.setString("test2");
         source2.setOutputing(true);
-        manager.registeTextFile(&source1, testFile);
-        QVERIFY(textFolder.exists(testFile));
+        manager.registeFile(&source1, manager.getTimerFileDir(), testFile);
+        QVERIFY(manager.getTimerFileDir().exists(testFile));
         QCOMPARE(manager.files[testFile]->readAll(), "test");
-        manager.registeTextFile(&source2, testFile);
+        manager.registeFile(&source2, manager.getTimerFileDir(), testFile);
         QCOMPARE(manager.files[testFile]->readAll(), "test2");
     }
 
-    void deregisteTextFile_test(){
-        manager.deregisteTextFile(testFile);
+    void registeTimerFile_test(){
+        FakeFileSource source;
+        source.setString("test");
+        source.setOutputing(true);
+        manager.registeTimerFile(&source, testFile);
+        QVERIFY(manager.getTimerFileDir().exists(testFile));
+        QCOMPARE(manager.files[testFile]->readAll(), "test");
+    }
+
+    void registeScoreFile_test(){
+        FakeFileSource source;
+        source.setString("test");
+        source.setOutputing(true);
+        manager.registeScoreFile(&source, testFile);
+        QVERIFY(manager.getScoreFileDir().exists(testFile));
+        QCOMPARE(manager.files[testFile]->readAll(), "test");
+    }
+
+    void getFilePathByName_test(){
+        FakeFileSource source;
+        source.setString("test");
+        source.setOutputing(true);
+        manager.registeScoreFile(&source, testFile);
+        QCOMPARE(manager.getFilePathByName(testFile), manager.getScoreFileDir().filePath(testFile));
+    }
+
+    void deregisteFile_test(){
+        FakeFileSource source;
+        source.setString("test");
+        source.setOutputing(true);
+        manager.registeTimerFile(&source, testFile);
+        QVERIFY(manager.getTimerFileDir().exists(testFile));
+        QCOMPARE(manager.files[testFile]->readAll(), "test");
+        manager.deregisteFile(testFile);
         QVERIFY(!manager.files.contains(testFile));
-        QFile file(textFolder.filePath(testFile));
+        QFile file(manager.getTimerFileDir().filePath(testFile));
         QCOMPARE(file.size(), 0);
     }
 
+    void cleanup(){
+        manager.deregisteFile(testFile);
+    }
+
     void cleanupTestCase(){
-        if(manager.getTextFileDir().exists()){
-            manager.getTextFileDir().rmdir(".");
-        }
-        if(manager.getConfigFileDir().exists()){
-            manager.getConfigFileDir().rmdir(".");
-        }
+        manager.getTimerFileDir().removeRecursively();
+        manager.getScoreFileDir().removeRecursively();
+        manager.getConfigFileDir().removeRecursively();
         QDir dir(QDir::currentPath() + "TestFolder");
-        if(dir.exists()){
-            dir.rmdir(".");
-        }
+        dir.removeRecursively();
     }
 private:
     FileManager manager;
-    QDir textFolder;
     const QString testFile ="TestFile";
 };
 

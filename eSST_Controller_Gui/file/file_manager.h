@@ -15,14 +15,19 @@ friend class UtFileManager;
 public:
     static FileManager* inst();
     ~FileManager();
-    QDir getTextFileDir() const;
+    QDir getTimerFileDir() const;
+    QDir getScoreFileDir() const;
     QDir getConfigFileDir() const;
-    QString registeTextFile(FileSource*, QString const &);
-    void deregisteTextFile(QString const &);
+    QString getFilePathByName(QString const &);
+    QString registeTimerFile(FileSource*, QString const &);
+    QString registeScoreFile(FileSource*, QString const &);
+    void deregisteFile(QString const &);
 private:
     FileManager(QObject *parent = nullptr);
+    QString registeFile(FileSource*, QDir const &, QString const &);
     void prepareFolder(QDir const &);
-    QDir textFileDir;
+    QDir timerFileDir;
+    QDir scoreFileDir;
     QDir confileFileDir;
     QMap<QString, File*> files;
 };

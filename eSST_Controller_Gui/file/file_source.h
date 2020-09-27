@@ -8,10 +8,13 @@ class FileSource : public QObject{
     Q_OBJECT
 public:
     FileSource(QObject *parent = nullptr);
-    virtual QString getString() = 0;
-    virtual bool isOutputing() const = 0;
+    virtual QString getString();
+    virtual bool isOutputing() const;
+    void setString(QString const &);
 signals:
     void contentUpdate();
+private:
+    QString string;
 };
 
 #endif // FILESOURCE_H

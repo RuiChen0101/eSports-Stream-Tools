@@ -17,5 +17,5 @@ QString DateTimeTimer::getString(){
 
 void DateTimeTimer::timeUpdate(){
     currentTime = QDateTime::currentDateTime();
-    contentUpdate();
+    emit(contentUpdate());
 }

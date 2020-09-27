@@ -8,7 +8,7 @@ void ChronoDownTimer::timeUpdate(){
     if(status == START || status == RESUME){
         remainSec -= remainSec >= 0 ? 1 : 0;
         parser.setSecond(remainSec);
-        contentUpdate();
+        emit(contentUpdate());
     }
 }
 
@@ -42,7 +42,7 @@ void ChronoDownTimer::setStatus(Status stat){
         remainSec = QTime(0, 0, 0).secsTo(target);
         parser.setSecond(remainSec);
     }
-    contentUpdate();
+    emit(contentUpdate());
 }
 
 void ChronoDownTimer::setTimeoutMsg(QString const &msg){

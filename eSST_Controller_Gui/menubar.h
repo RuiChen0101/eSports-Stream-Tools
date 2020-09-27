@@ -15,7 +15,8 @@ public:
 public slots:
     void githubPageToggled();
     void settingToggled();
-    void showFileFolderToggled();
+    void showTimerFileFolderToggled();
+    void showScoreFileFolderToggled();
 private:
     const QString githubPageUrl = "https://github.com/RuiChen0101/eSports-Stream-Tools";
 };

@@ -87,9 +87,7 @@ private slots:
     }
 
     void cleanupTestCase(){
-        if(testFolder.exists()){
-            testFolder.rmdir(".");
-        }
+        testFolder.removeRecursively();
     }
 private:
     QDir testFolder;

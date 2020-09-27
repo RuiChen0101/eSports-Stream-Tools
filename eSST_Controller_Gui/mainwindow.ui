@@ -73,7 +73,23 @@
        <attribute name="title">
         <string>ScoreBoard</string>
        </attribute>
-       <layout class="QGridLayout" name="score_tab_layout"/>
+       <layout class="QGridLayout" name="score_tab_layout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+       </layout>
       </widget>
       <widget class="QWidget" name="network_tab">
        <attribute name="title">
@@ -120,7 +136,8 @@ QMenu::item:selected {
      <bool>false</bool>
     </property>
     <addaction name="action_setting"/>
-    <addaction name="action_show_file_folder"/>
+    <addaction name="action_show_timer_file_folder"/>
+    <addaction name="action_show_score_file_folder"/>
    </widget>
    <widget class="QMenu" name="menu_help">
     <property name="styleSheet">
@@ -164,9 +181,9 @@ QMenu::item:selected {
     </font>
    </property>
   </action>
-  <action name="action_show_file_folder">
+  <action name="action_show_timer_file_folder">
    <property name="text">
-    <string>Show File Folder</string>
+    <string>Show Timer File Folder</string>
    </property>
    <property name="font">
     <font>
@@ -190,6 +207,11 @@ QMenu::item:selected {
   <action name="actionpages">
    <property name="text">
     <string>pages</string>
+   </property>
+  </action>
+  <action name="action_show_score_file_folder">
+   <property name="text">
+    <string>Show Score File Folder</string>
    </property>
   </action>
  </widget>

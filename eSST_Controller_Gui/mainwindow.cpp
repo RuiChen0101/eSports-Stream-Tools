@@ -6,15 +6,18 @@ MainWindow::MainWindow(QWidget *parent):
     ui->setupUi(this);
 
     ui->timer_tab_layout->addWidget(new TimerView(this));
+    ui->score_tab_layout->addWidget(new ScoreBoardView(this));
     menuBar = new MenuBar(this);
     connectSignal();
 }
 
 MainWindow::~MainWindow(){
     delete ui;
+    delete menuBar;
 }
 
 void MainWindow::connectSignal(){
     connect(ui->action_github_page, SIGNAL(triggered()), menuBar, SLOT(githubPageToggled()));
-    connect(ui->action_show_file_folder, SIGNAL(triggered()), menuBar, SLOT(showFileFolderToggled()));
+    connect(ui->action_show_timer_file_folder, SIGNAL(triggered()), menuBar, SLOT(showTimerFileFolderToggled()));
+    connect(ui->action_show_score_file_folder, SIGNAL(triggered()), menuBar, SLOT(showScoreFileFolderToggled()));
 }

@@ -8,7 +8,7 @@ void CountDownTimer::timeUpdate(){
     if(status == START){
         remainSec -= remainSec >= 0 ? 1 : 0;
         parser.setSecond(remainSec);
-        contentUpdate();
+        emit(contentUpdate());
     }
 }
 
@@ -43,7 +43,7 @@ void CountDownTimer::setStatus(Status stat){
     if(status == START){
         parser.setSecond(remainSec);
     }
-    contentUpdate();
+    emit(contentUpdate());
 }
 
 void CountDownTimer::setTimeoutMsg(QString const &msg){

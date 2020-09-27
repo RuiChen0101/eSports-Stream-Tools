@@ -13,6 +13,10 @@ void MenuBar::settingToggled(){
 
 }
 
-void MenuBar::showFileFolderToggled(){
-    SystemCall::openFolder(FileManager::inst()->getTextFileDir());
+void MenuBar::showTimerFileFolderToggled(){
+    SystemCall::openFolder(FileManager::inst()->getTimerFileDir());
+}
+
+void MenuBar::showScoreFileFolderToggled(){
+    SystemCall::openFolder(FileManager::inst()->getScoreFileDir());
 }

@@ -14,6 +14,9 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     menubar.cpp \
+    score_board/point.cpp \
+    score_board/round.cpp \
+    score_board/team.cpp \
     timer/chrono_down_timer.cpp \
     timer/countdown_timer.cpp \
     timer/date_time_timer.cpp \
@@ -30,6 +33,9 @@ HEADERS += \
     file/file_source.h \
     mainwindow.h \
     menubar.h \
+    score_board/point.h \
+    score_board/round.h \
+    score_board/team.h \
     timer/chrono_down_timer.h \
     timer/countdown_timer.h \
     timer/date_time_timer.h \

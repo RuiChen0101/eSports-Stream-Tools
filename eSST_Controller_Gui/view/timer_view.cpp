@@ -136,9 +136,9 @@ void TimerView::connectSignal(){
 }
 
 void TimerView::registeOutputFile(){
-    QString dateTimeFilePath = FileManager::inst()->registeTextFile(&dateTime, "DateTime.txt");
-    QString countdownFilePath = FileManager::inst()->registeTextFile(&countdown, "Countdown.txt");
-    QString chronoDownFilePath = FileManager::inst()->registeTextFile(&chronoDown, "ChronoDown.txt");
+    QString dateTimeFilePath = FileManager::inst()->registeTimerFile(&dateTime, "DateTime.txt");
+    QString countdownFilePath = FileManager::inst()->registeTimerFile(&countdown, "Countdown.txt");
+    QString chronoDownFilePath = FileManager::inst()->registeTimerFile(&chronoDown, "ChronoDown.txt");
     QString flex1FilePath = registeFlexOutputFile(ui->flex_output1_select->currentIndex(), "FlexOutput1.txt");
     QString flex2FilePath = registeFlexOutputFile(ui->flex_output2_select->currentIndex(), "FlexOutput2.txt");
     ui->datetime_output_file->setText(dateTimeFilePath);
@@ -152,13 +152,13 @@ QString TimerView::registeFlexOutputFile(int index, QString const &fileName){
     QString filePath;
     switch (index) {
     case 0:
-        filePath = FileManager::inst()->registeTextFile(&dateTime, fileName);
+        filePath = FileManager::inst()->registeTimerFile(&dateTime, fileName);
         break;
     case 1:
-        filePath = FileManager::inst()->registeTextFile(&countdown, fileName);
+        filePath = FileManager::inst()->registeTimerFile(&countdown, fileName);
         break;
     case 2:
-        filePath = FileManager::inst()->registeTextFile(&chronoDown, fileName);
+        filePath = FileManager::inst()->registeTimerFile(&chronoDown, fileName);
         break;
     }
     return filePath;

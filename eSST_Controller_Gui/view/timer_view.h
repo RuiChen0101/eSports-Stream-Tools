@@ -18,6 +18,7 @@ class TimerView : public QWidget{
 public:
     explicit TimerView(QWidget *parent = nullptr);
     ~TimerView();
+
 private slots:
     void timeUpdate();
     void countDownSettingUpdate();
@@ -27,6 +28,7 @@ private slots:
     void chronoDownStatusUpdate();
     void flexOutputSelectChange(int);
     void reset();
+
 private:
     void connectSignal();
     void registeOutputFile();

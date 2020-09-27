@@ -4,6 +4,7 @@
 #include "menubar.h"
 
 #include "view/timer_view.h"
+#include "view/score_board_view.h"
 
 #include <QMainWindow>
 

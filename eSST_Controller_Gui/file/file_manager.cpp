@@ -7,9 +7,11 @@ FileManager* FileManager::inst(){
 
 FileManager::FileManager(QObject *parent):
     QObject(parent){
-    textFileDir.setPath(QDir::currentPath() + "/TextFiles");
+    timerFileDir.setPath(QDir::currentPath() + "/TimerFiles");
+    scoreFileDir.setPath(QDir::currentPath() + "/ScoreFiles");
     confileFileDir.setPath(QDir::currentPath() + "/ConfigFiles");
-    prepareFolder(textFileDir);
+    prepareFolder(timerFileDir);
+    prepareFolder(scoreFileDir);
     prepareFolder(confileFileDir);
 }
 
@@ -21,29 +23,49 @@ FileManager::~FileManager(){
     files.clear();
 }
 
-QDir FileManager::getTextFileDir() const{
-    return textFileDir;
+QDir FileManager::getTimerFileDir() const{
+    return timerFileDir;
+}
+
+QDir FileManager::getScoreFileDir() const{
+    return scoreFileDir;
 }
 
 QDir FileManager::getConfigFileDir() const{
     return confileFileDir;
 }
 
-QString FileManager::registeTextFile(FileSource *source, QString const &fileName){
+QString FileManager::getFilePathByName(QString const &fileName){
+    if(files.contains(fileName)){
+        return files[fileName]->getFilePath();
+    }else{
+        return "";
+    }
+}
+
+QString FileManager::registeTimerFile(FileSource *source, QString const &fileName){
+    return registeFile(source, timerFileDir, fileName);
+}
+
+QString FileManager::registeScoreFile(FileSource *source, QString const &fileName){
+    return registeFile(source, scoreFileDir, fileName);
+}
+
+void FileManager::deregisteFile(QString const &fileName){
+    if(files.contains(fileName)){
+        delete files[fileName];
+        files.remove(fileName);
+    }
+}
+
+QString FileManager::registeFile(FileSource *source, QDir const &dir, QString const &fileName){
     if(files.contains(fileName)){
         files[fileName]->setFileSource(source);
         return files[fileName]->getFilePath();
     }else{
-        QString filePath = textFileDir.filePath(fileName);
+        QString filePath = dir.filePath(fileName);
         files.insert(fileName, new File(source, filePath));
         return filePath;
-    }
-}
-
-void FileManager::deregisteTextFile(QString const &fileName){
-    if(files.contains(fileName)){
-        delete files[fileName];
-        files.remove(fileName);
     }
 }
 
