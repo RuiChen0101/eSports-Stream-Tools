@@ -16,6 +16,7 @@ HEADERS += \
     testexec.h \
     testsetup.h \
     ut_file/fake_file_source.h \
+    ut_file/ut_config_file.h \
     ut_file/ut_file.h \
     ut_file/ut_file_manager.h \
     ut_file/ut_file_source.h \

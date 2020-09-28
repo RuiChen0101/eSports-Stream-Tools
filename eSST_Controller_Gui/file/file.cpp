@@ -1,5 +1,4 @@
 #include "file.h"
-#include <QDebug>
 
 File::File(FileSource *source, QString const &path):
     QObject(nullptr), file(path), path(path), source(source){

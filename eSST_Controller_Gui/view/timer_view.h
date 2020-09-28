@@ -5,6 +5,8 @@
 #include "timer/countdown_timer.h"
 #include "timer/chrono_down_timer.h"
 
+#include "file/config_file.h"
+
 #include <QDebug>
 #include <QWidget>
 
@@ -32,11 +34,14 @@ private slots:
 private:
     void connectSignal();
     void registeOutputFile();
+    void loadConfig();
+    void saveConfig();
     QString registeFlexOutputFile(int, QString const &);
     Ui::TimerView *ui;
     DateTimeTimer dateTime;
     CountDownTimer countdown;
     ChronoDownTimer chronoDown;
+    ConfigFile config;
 };
 
 #endif // TIMERVIEW_H

@@ -4,8 +4,9 @@
 #include "utility/timetick.h"
 
 TimerView::TimerView(QWidget *parent) :
-    QWidget(parent), ui(new Ui::TimerView){
+    QWidget(parent), ui(new Ui::TimerView), config("TimerViewConfig.json"){
     ui->setupUi(this);
+    loadConfig();
     connectSignal();
     registeOutputFile();
     ui->countdown_target->setDateTime(QDateTime::currentDateTime());
@@ -15,6 +16,7 @@ TimerView::TimerView(QWidget *parent) :
 }
 
 TimerView::~TimerView(){
+    saveConfig();
     delete ui;
 }
 
@@ -162,4 +164,39 @@ QString TimerView::registeFlexOutputFile(int index, QString const &fileName){
         break;
     }
     return filePath;
+}
+
+void TimerView::loadConfig(){
+    if(config.loadFile()){
+        try{
+            ui->flex_output1_select->setCurrentIndex(config.read("flex1_select").toInt());
+            ui->flex_output2_select->setCurrentIndex(config.read("flex2_select").toInt());
+            ui->datetime_formate_edit->setText(config.read("date_time_format").toString());
+            ui->countdown_formate_edit->setText(config.read("countdown_format").toString());
+            ui->countdown_timeout_msg_edit->setText(config.read("countdown_timeout_msg").toString());
+            ui->chronodown_formate_edit->setText(config.read("chrono_down_format").toString());
+            ui->chronodown_timeout_msg_edit->setText(config.read("chrono_down_timeout_msg").toString());
+            ui->chronodown_target->setTime(
+                QTime(
+                    config.read("chrono_down_target_hour").toInt(),
+                    config.read("chrono_down_target_min").toInt(),
+                    config.read("chrono_down_target_sec").toInt()
+            ));
+        }catch(std::runtime_error &e){
+
+        }
+    }
+}
+
+void TimerView::saveConfig(){
+    config.insert("flex1_select", ui->flex_output1_select->currentIndex());
+    config.insert("flex2_select", ui->flex_output2_select->currentIndex());
+    config.insert("date_time_format", ui->datetime_formate_edit->text());
+    config.insert("countdown_format", ui->countdown_formate_edit->text());
+    config.insert("countdown_timeout_msg", ui->countdown_timeout_msg_edit->text());
+    config.insert("chrono_down_format", ui->chronodown_formate_edit->text());
+    config.insert("chrono_down_timeout_msg",ui->chronodown_timeout_msg_edit->text());
+    config.insert("chrono_down_target_hour", ui->chronodown_target->time().hour());
+    config.insert("chrono_down_target_min", ui->chronodown_target->time().minute());
+    config.insert("chrono_down_target_sec", ui->chronodown_target->time().second());
 }

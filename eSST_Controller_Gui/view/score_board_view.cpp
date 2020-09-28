@@ -2,8 +2,9 @@
 #include "ui_score_board_view.h"
 
 ScoreBoardView::ScoreBoardView(QWidget *parent) :
-    QWidget(parent), ui(new Ui::ScoreBoardView), team1("team1"), team2("team2"){
+    QWidget(parent), ui(new Ui::ScoreBoardView), team1("team1"), team2("team2"), config("ScoreBoardViewConfig.json"){
     ui->setupUi(this);
+    loadConfig();
     registeFiles();
     connectSignal();
     teamNameUpdate();
@@ -12,6 +13,7 @@ ScoreBoardView::ScoreBoardView(QWidget *parent) :
 }
 
 ScoreBoardView::~ScoreBoardView(){
+    saveConfig();
     delete ui;
 }
 
@@ -86,4 +88,30 @@ void ScoreBoardView::connectSignal(){
     connect(ui->team2_round_invert_check, SIGNAL(stateChanged(int)), this, SLOT(scoreBoardSettingUpdate()));
 
     connect(ui->use_digits_check, SIGNAL(stateChanged(int)), this, SLOT(useDoubleDigitUpdate(int)));
+}
+
+void ScoreBoardView::loadConfig(){
+    if(config.loadFile()){
+        try{
+            ui->team1_name_edit->setText(config.read("team1_name").toString());
+            ui->team2_name_edit->setText(config.read("team2_name").toString());
+            ui->use_digits_check->setChecked(config.read("use_digits").toBool());
+            ui->round_format->setText(config.read("round_format").toString());
+            ui->team1_round_invert_check->setChecked(config.read("team1_round_invert").toBool());
+            ui->team2_round_invert_check->setChecked(config.read("team2_round_invert").toBool());
+            ui->best_of_edit->setText(config.read("best_of").toString());
+        }catch(std::runtime_error &e){
+
+        }
+    }
+}
+
+void ScoreBoardView::saveConfig(){
+    config.insert("team1_name", ui->team1_name_edit->text());
+    config.insert("team2_name", ui->team1_name_edit->text());
+    config.insert("use_digits", ui->use_digits_check->isChecked());
+    config.insert("round_format", ui->round_format->text());
+    config.insert("team1_round_invert", ui->team1_round_invert_check->isChecked());
+    config.insert("team2_round_invert", ui->team2_round_invert_check->isChecked());
+    config.insert("best_of", ui->best_of_edit->text());
 }

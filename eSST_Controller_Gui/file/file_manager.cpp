@@ -24,14 +24,23 @@ FileManager::~FileManager(){
 }
 
 QDir FileManager::getTimerFileDir() const{
+    if(!timerFileDir.exists()){
+        timerFileDir.mkdir(".");
+    }
     return timerFileDir;
 }
 
 QDir FileManager::getScoreFileDir() const{
+    if(!scoreFileDir.exists()){
+        scoreFileDir.mkdir(".");
+    }
     return scoreFileDir;
 }
 
 QDir FileManager::getConfigFileDir() const{
+    if(!confileFileDir.exists()){
+        confileFileDir.mkdir(".");
+    }
     return confileFileDir;
 }
 

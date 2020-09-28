@@ -8,6 +8,7 @@ TEMPLATE = app
 CONFIG += c++11
 
 SOURCES += \
+    file/config_file.cpp \
     file/file.cpp \
     file/file_manager.cpp \
     file/file_source.cpp \
@@ -28,6 +29,7 @@ SOURCES += \
     view/timer_view.cpp
 
 HEADERS += \
+    file/config_file.h \
     file/file.h \
     file/file_manager.h \
     file/file_source.h \
