@@ -5,15 +5,18 @@ MainWindow::MainWindow(QWidget *parent):
     QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
 
+    menuBar = new MenuBar(this);
+    statusBar = new StatusBar(ui->status_bar, this);
+
     ui->timer_tab_layout->addWidget(new TimerView(this));
     ui->score_tab_layout->addWidget(new ScoreBoardView(this));
-    menuBar = new MenuBar(this);
     connectSignal();
 }
 
 MainWindow::~MainWindow(){
     delete ui;
     delete menuBar;
+    delete statusBar;
 }
 
 void MainWindow::connectSignal(){

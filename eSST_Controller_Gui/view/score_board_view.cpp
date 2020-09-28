@@ -1,5 +1,6 @@
 #include "score_board_view.h"
 #include "ui_score_board_view.h"
+#include "utility/signal_bus.h"
 
 ScoreBoardView::ScoreBoardView(QWidget *parent) :
     QWidget(parent), ui(new Ui::ScoreBoardView), team1("team1"), team2("team2"), config("ScoreBoardViewConfig.json"){
@@ -100,10 +101,14 @@ void ScoreBoardView::loadConfig(){
             ui->team1_round_invert_check->setChecked(config.read("team1_round_invert").toBool());
             ui->team2_round_invert_check->setChecked(config.read("team2_round_invert").toBool());
             ui->best_of_edit->setText(config.read("best_of").toString());
+            return;
         }catch(std::runtime_error &e){
-
+            emit(SignalBus::inst()->systemMessageEvent("ScoreBoardView load config fail"));
         }
+    }else{
+        emit(SignalBus::inst()->systemMessageEvent("ScoreBoardView load config fail"));
     }
+
 }
 
 void ScoreBoardView::saveConfig(){

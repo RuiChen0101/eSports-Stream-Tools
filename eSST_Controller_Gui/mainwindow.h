@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "menubar.h"
+#include "statusbar.h"
 
 #include "view/timer_view.h"
 #include "view/score_board_view.h"
@@ -23,5 +24,6 @@ private:
     void connectSignal();
     Ui::MainWindow *ui;
     MenuBar *menuBar;
+    StatusBar *statusBar;
 };
 #endif // MAINWINDOW_H

@@ -2,6 +2,7 @@
 #include "ui_timer_view.h"
 #include "file/file_manager.h"
 #include "utility/timetick.h"
+#include "utility/signal_bus.h"
 
 TimerView::TimerView(QWidget *parent) :
     QWidget(parent), ui(new Ui::TimerView), config("TimerViewConfig.json"){
@@ -182,9 +183,12 @@ void TimerView::loadConfig(){
                     config.read("chrono_down_target_min").toInt(),
                     config.read("chrono_down_target_sec").toInt()
             ));
+            return;
         }catch(std::runtime_error &e){
-
+            emit(SignalBus::inst()->systemMessageEvent("TimerView load config fail"));
         }
+    }else{
+        emit(SignalBus::inst()->systemMessageEvent("TimerView load config fail"));
     }
 }
 
