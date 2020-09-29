@@ -11,7 +11,7 @@ private slots:
     void setFormat_test(){
         CountDownTimer timer;
         timer.setFormat("TEST");
-        QCOMPARE(timer.parser.getString(), "TEST");
+        QCOMPARE(timer.parser.getString(), QString("TEST"));
     }
 
     void isOutputing_test(){
@@ -26,13 +26,13 @@ private slots:
         timer.setFormat("TEST $h:$m:$s");
         timer.remainSec = 62;
         timer.setStatus(CountDownTimer::START);
-        QCOMPARE(timer.getString(), "TEST 00:01:02");
+        QCOMPARE(timer.getString(), QString("TEST 00:01:02"));
         timer.timeUpdate();
-        QCOMPARE(timer.getString(), "TEST 00:01:01");
+        QCOMPARE(timer.getString(), QString("TEST 00:01:01"));
         timer.timeUpdate();
-        QCOMPARE(timer.getString(), "TEST 00:01:00");
+        QCOMPARE(timer.getString(), QString("TEST 00:01:00"));
         timer.timeUpdate();
-        QCOMPARE(timer.getString(), "TEST 00:00:59");
+        QCOMPARE(timer.getString(), QString("TEST 00:00:59"));
     }
 
     void stop_countdown_and_update_time_test(){
@@ -40,15 +40,15 @@ private slots:
         timer.setFormat("TEST $h:$m:$s");
         timer.remainSec = 62;
         timer.setStatus(CountDownTimer::START);
-        QCOMPARE(timer.getString(), "TEST 00:01:02");
+        QCOMPARE(timer.getString(), QString("TEST 00:01:02"));
         timer.setStatus(CountDownTimer::STOP);
-        QCOMPARE(timer.getString(), "");
+        QCOMPARE(timer.getString(), QString(""));
     }
 
     void setTimeoutMsg_test(){
         CountDownTimer timer;
         timer.setTimeoutMsg("TimeOut");
-        QCOMPARE(timer.timeoutMsg, "TimeOut");
+        QCOMPARE(timer.timeoutMsg, QString("TimeOut"));
     }
 
     void chrono_time_out_test(){
@@ -57,11 +57,11 @@ private slots:
         timer.setFormat("TEST $h:$m:$s");
         timer.remainSec = 1;
         timer.setStatus(CountDownTimer::START);
-        QCOMPARE(timer.getString(), "TEST 00:00:01");
+        QCOMPARE(timer.getString(), QString("TEST 00:00:01"));
         timer.timeUpdate();
-        QCOMPARE(timer.getString(), "TEST 00:00:00");
+        QCOMPARE(timer.getString(), QString("TEST 00:00:00"));
         timer.timeUpdate();
-        QCOMPARE(timer.getString(), "TimeOut");
+        QCOMPARE(timer.getString(), QString("TimeOut"));
     }
 
     void double_digit_switch_test(){
@@ -69,9 +69,9 @@ private slots:
         timer.setFormat("TEST $h:$m:$s");
         timer.remainSec = 62;
         timer.setStatus(CountDownTimer::START);
-        QCOMPARE(timer.getString(), "TEST 00:01:02");
+        QCOMPARE(timer.getString(), QString("TEST 00:01:02"));
         timer.setDoubleDigit(false);
-        QCOMPARE(timer.getString(), "TEST 0:1:2");
+        QCOMPARE(timer.getString(), QString("TEST 0:1:2"));
     }
 };
 

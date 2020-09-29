@@ -1,5 +1,4 @@
 #include "file_manager.h"
-#include <QDebug>
 
 FileManager* FileManager::inst(){
     static FileManager Inst;
@@ -83,6 +82,6 @@ QString FileManager::registeFile(FileSource *source, QDir const &dir, QString co
 
 void FileManager::prepareFolder(QDir const &folder){
     if(!folder.exists()){
-        folder.mkdir(".");
+        folder.mkpath(folder.path());
     }
 }

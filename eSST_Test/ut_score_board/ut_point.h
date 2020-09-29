@@ -15,8 +15,8 @@ private slots:
 
     void getPoint_and_getString_test(){
         Point points;
-        QCOMPARE(points.getPoint(), 0);
-        QCOMPARE(points.getString(), "0");
+        QCOMPARE(points.getPoint(), qint8(0));
+        QCOMPARE(points.getString(), QString("0"));
     }
 
     void addPoint_test(){
@@ -24,20 +24,20 @@ private slots:
         QSignalSpy spy(&points, SIGNAL(contentUpdate()));
         points.addPoint(1);
         QCOMPARE(spy.count(), 1);
-        QCOMPARE(points.getPoint(), 1);
-        QCOMPARE(points.getString(), "1");
+        QCOMPARE(points.getPoint(), qint8(1));
+        QCOMPARE(points.getString(), QString("1"));
     }
 
     void reset_test(){
         Point points;
         points.addPoint(1);
-        QCOMPARE(points.getPoint(), 1);
-        QCOMPARE(points.getString(), "1");
+        QCOMPARE(points.getPoint(), qint8(1));
+        QCOMPARE(points.getString(), QString("1"));
         QSignalSpy spy(&points, SIGNAL(contentUpdate()));
         points.reset();
         QCOMPARE(spy.count(), 1);
-        QCOMPARE(points.getPoint(), 0);
-        QCOMPARE(points.getString(), "0");
+        QCOMPARE(points.getPoint(), qint8(0));
+        QCOMPARE(points.getString(), QString("0"));
     }
 };
 

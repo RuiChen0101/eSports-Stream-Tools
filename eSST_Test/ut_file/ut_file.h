@@ -28,7 +28,7 @@ private slots:
         source.setString("test");
         source.setOutputing(false);
         File file(&source, testFilePath);
-        QCOMPARE(file.readAll(), "");
+        QCOMPARE(file.readAll(), QString(""));
     }
 
     void construct_with_source_outputing_test(){
@@ -36,7 +36,7 @@ private slots:
         source.setString("test");
         source.setOutputing(true);
         File file(&source, testFilePath);
-        QCOMPARE(file.readAll(), "test");
+        QCOMPARE(file.readAll(), QString("test"));
     }
 
     void destructor_test(){
@@ -45,7 +45,7 @@ private slots:
             source.setString("test");
             source.setOutputing(true);
             File file(&source, testFilePath);
-            QCOMPARE(file.readAll(), "test");
+            QCOMPARE(file.readAll(), QString("test"));
         }
         QFile file(testFolder.filePath(testFile));
         QCOMPARE(file.size(), 0);
@@ -62,9 +62,9 @@ private slots:
         source.setString("test");
         source.setOutputing(true);
         File file(&source, testFilePath);
-        QCOMPARE(file.readAll(), "test");
+        QCOMPARE(file.readAll(),QString("test"));
         source.setString("test2");
-        QCOMPARE(file.readAll(), "test2");
+        QCOMPARE(file.readAll(), QString("test2"));
     }
 
     void change_file_source_test(){
@@ -75,9 +75,9 @@ private slots:
         source2.setString("test2");
         source2.setOutputing(true);
         File file(&source1, testFilePath);
-        QCOMPARE(file.readAll(), "test");
+        QCOMPARE(file.readAll(), QString("test"));
         file.setFileSource(&source2);
-        QCOMPARE(file.readAll(), "test2");
+        QCOMPARE(file.readAll(), QString("test2"));
     }
 
     void cleanup(){

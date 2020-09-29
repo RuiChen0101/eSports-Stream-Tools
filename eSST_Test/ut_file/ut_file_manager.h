@@ -31,9 +31,9 @@ private slots:
         source2.setOutputing(true);
         manager.registeFile(&source1, manager.getTimerFileDir(), testFile);
         QVERIFY(manager.getTimerFileDir().exists(testFile));
-        QCOMPARE(manager.files[testFile]->readAll(), "test");
+        QCOMPARE(manager.files[testFile]->readAll(), QString("test"));
         manager.registeFile(&source2, manager.getTimerFileDir(), testFile);
-        QCOMPARE(manager.files[testFile]->readAll(), "test2");
+        QCOMPARE(manager.files[testFile]->readAll(), QString("test2"));
     }
 
     void registeTimerFile_test(){
@@ -42,7 +42,7 @@ private slots:
         source.setOutputing(true);
         manager.registeTimerFile(&source, testFile);
         QVERIFY(manager.getTimerFileDir().exists(testFile));
-        QCOMPARE(manager.files[testFile]->readAll(), "test");
+        QCOMPARE(manager.files[testFile]->readAll(), QString("test"));
     }
 
     void registeScoreFile_test(){
@@ -51,7 +51,7 @@ private slots:
         source.setOutputing(true);
         manager.registeScoreFile(&source, testFile);
         QVERIFY(manager.getScoreFileDir().exists(testFile));
-        QCOMPARE(manager.files[testFile]->readAll(), "test");
+        QCOMPARE(manager.files[testFile]->readAll(), QString("test"));
     }
 
     void getFilePathByName_test(){
@@ -68,7 +68,7 @@ private slots:
         source.setOutputing(true);
         manager.registeTimerFile(&source, testFile);
         QVERIFY(manager.getTimerFileDir().exists(testFile));
-        QCOMPARE(manager.files[testFile]->readAll(), "test");
+        QCOMPARE(manager.files[testFile]->readAll(), QString("test"));
         manager.deregisteFile(testFile);
         QVERIFY(!manager.files.contains(testFile));
         QFile file(manager.getTimerFileDir().filePath(testFile));

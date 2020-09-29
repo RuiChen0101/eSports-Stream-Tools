@@ -21,7 +21,7 @@ private slots:
         QVERIFY(spy.isValid());
         source.setString("test");
         QCOMPARE(spy.count(), 1);
-        QCOMPARE(source.getString(), "test");
+        QCOMPARE(source.getString(), QString("test"));
     }
 };
 

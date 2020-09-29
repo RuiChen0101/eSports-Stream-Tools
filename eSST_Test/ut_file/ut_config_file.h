@@ -25,9 +25,9 @@ private slots:
         config.insert("string", "test string");
         config.insert("int", 1);
         config.insert("bool", true);
-        QCOMPARE(config.read("string"), "test string");
-        QCOMPARE(config.read("int"), 1);
-        QCOMPARE(config.read("bool"), true);
+        QCOMPARE(config.read("string").toString(), QString("test string"));
+        QCOMPARE(config.read("int").toInt(), 1);
+        QCOMPARE(config.read("bool").toBool(), true);
     }
 
     void read_not_exist_key_throw_test(){
@@ -60,7 +60,7 @@ private slots:
         file.open(QIODevice::ReadOnly);
         QString savedString = file.readAll();
         file.close();
-        QCOMPARE(savedString, "{\"int\":1,\"string\":\"test string\"}");
+        QCOMPARE(savedString, QString("{\"int\":1,\"string\":\"test string\"}"));
     }
 
     void cleanup(){

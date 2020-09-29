@@ -73,4 +73,5 @@ Thumbs.db
 build/
 
 #Installer
+eSST_Installer/*.exe
 eSST_Installer/packages/eSSTController/data/*

@@ -17,41 +17,41 @@ private slots:
     void setTeamName_test(){
         Team team(testId);
         team.setTeamName("testName");
-        QCOMPARE(team.teamName.getString(), "testName");
+        QCOMPARE(team.teamName.getString(), QString("testName"));
     }
 
     void setInvert_test(){
         Team team(testId);
         team.addRound();
-        QCOMPARE(team.getRound(), "●○");
+        QCOMPARE(team.getRound(), QString("●○"));
         team.setInvert(true);
-        QCOMPARE(team.getRound(), "○●");
+        QCOMPARE(team.getRound(), QString("○●"));
     }
 
     void addPoint_getPoint_resetPoint_test(){
         Team team(testId);
-        QCOMPARE(team.getPoint(), 0);
+        QCOMPARE(team.getPoint(), qint8(0));
         QSignalSpy spy(&team, SIGNAL(contentUpdate()));
         team.addPoint();
-        QCOMPARE(team.getPoint(), 1);
+        QCOMPARE(team.getPoint(), qint8(1));
         QCOMPARE(spy.count(), 1);
         spy.clear();
         team.resetPoint();
-        QCOMPARE(team.getPoint(), 0);
+        QCOMPARE(team.getPoint(), qint8(0));
         QCOMPARE(spy.count(), 1);
         spy.clear();
     }
 
     void addRound_getRound_resetPoint_test(){
         Team team(testId);
-        QCOMPARE(team.getRound(), "○○");
+        QCOMPARE(team.getRound(), QString("○○"));
         QSignalSpy spy(&team, SIGNAL(contentUpdate()));
         team.addRound();
-        QCOMPARE(team.getRound(), "●○");
+        QCOMPARE(team.getRound(), QString("●○"));
         QCOMPARE(spy.count(), 1);
         spy.clear();
         team.resetRound();
-        QCOMPARE(team.getRound(), "○○");
+        QCOMPARE(team.getRound(), QString("○○"));
         QCOMPARE(spy.count(), 1);
         spy.clear();
     }

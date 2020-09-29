@@ -5,5 +5,5 @@
     <Title>eSports Stream Tool</Title>
     <Publisher>TTES ruichen</Publisher>
     <StartMenuDir>eSports Stream Tool</StartMenuDir>
-    <TargetDir>@ApplicationsDir@/eSport Stream Tools</TargetDir>
+    <TargetDir>@ApplicationsDir@/eSports Stream Tools</TargetDir>
 </Installer>

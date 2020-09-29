@@ -1,0 +1,12 @@
+sudo: required
+os: linux
+dist: trusty
+language: cpp
+
+install:
+  - sudo apt-get install -y qt5-default qttools5-dev-tools
+
+script:
+  - qmake "CONFIG+=debug" "CONFIG+=qml_debug" eSports_Stream_Tools.pro && make qmake_all
+  - make
+  - eSST_Test/eSST_Test
