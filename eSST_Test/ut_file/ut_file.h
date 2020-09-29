@@ -14,7 +14,7 @@ private slots:
     void initTestCase(){
         testFolder.setPath(QDir::currentPath() + "/TestFiles");
         if(!testFolder.exists()){
-            testFolder.mkdir(".");
+            testFolder.mkpath(testFolder.path());
         }
         if(testFolder.exists(testFile)){
             testFolder.remove(testFile);

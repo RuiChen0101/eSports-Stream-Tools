@@ -10,11 +10,11 @@ FileManager::FileManager(QObject *parent):
     rootDir.setPath(QDir::homePath() + "/eSST");
     timerFileDir.setPath(rootDir.path() + "/TimerFiles");
     scoreFileDir.setPath(rootDir.path() + "/ScoreFiles");
-    confileFileDir.setPath(rootDir.path() + "/ConfigFiles");
+    configFileDir.setPath(rootDir.path() + "/ConfigFiles");
     prepareFolder(rootDir);
     prepareFolder(timerFileDir);
     prepareFolder(scoreFileDir);
-    prepareFolder(confileFileDir);
+    prepareFolder(configFileDir);
 }
 
 FileManager::~FileManager(){
@@ -26,24 +26,18 @@ FileManager::~FileManager(){
 }
 
 QDir FileManager::getTimerFileDir() const{
-    if(!timerFileDir.exists()){
-        timerFileDir.mkdir(".");
-    }
+    prepareFolder(timerFileDir);
     return timerFileDir;
 }
 
 QDir FileManager::getScoreFileDir() const{
-    if(!scoreFileDir.exists()){
-        scoreFileDir.mkdir(".");
-    }
+    prepareFolder(scoreFileDir);
     return scoreFileDir;
 }
 
 QDir FileManager::getConfigFileDir() const{
-    if(!confileFileDir.exists()){
-        confileFileDir.mkdir(".");
-    }
-    return confileFileDir;
+    prepareFolder(configFileDir);
+    return configFileDir;
 }
 
 QString FileManager::getFilePathByName(QString const &fileName){
@@ -80,7 +74,7 @@ QString FileManager::registeFile(FileSource *source, QDir const &dir, QString co
     }
 }
 
-void FileManager::prepareFolder(QDir const &folder){
+void FileManager::prepareFolder(QDir const &folder) const{
     if(!folder.exists()){
         folder.mkpath(folder.path());
     }

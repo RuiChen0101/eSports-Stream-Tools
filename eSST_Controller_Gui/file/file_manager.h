@@ -25,11 +25,11 @@ public:
 private:
     FileManager(QObject *parent = nullptr);
     QString registeFile(FileSource*, QDir const &, QString const &);
-    void prepareFolder(QDir const &);
+    void prepareFolder(QDir const &) const;
     QDir rootDir;
     QDir timerFileDir;
     QDir scoreFileDir;
-    QDir confileFileDir;
+    QDir configFileDir;
     QMap<QString, File*> files;
 };
 
