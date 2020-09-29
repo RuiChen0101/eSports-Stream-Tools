@@ -36,17 +36,17 @@ QString TimerFormatParser::getString(){
     QString result = "";
     QString::const_iterator it = format.begin();
     while(it != format.end()){
-        if(*it == "$"){
-            if(*(it+1) == "s"){
+        if(*it == QChar('$')){
+            if(*(it+1) == QChar('s')){
                 result += numberToString(timeUnit.sec);
                 it++;
-            }else if(*(it+1) == "m"){
+            }else if(*(it+1) == QChar('m')){
                 result += numberToString(timeUnit.min);
                 it++;
-            }else if(*(it+1) == "h"){
+            }else if(*(it+1) == QChar('h')){
                 result += numberToString(timeUnit.hour);
                 it++;
-            }else if(*(it+1) == "d"){
+            }else if(*(it+1) == QChar('d')){
                 result += numberToString(timeUnit.day);
                 it++;
             }else{

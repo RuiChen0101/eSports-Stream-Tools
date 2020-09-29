@@ -1,6 +1,7 @@
 #ifndef TIMERFORMATPARSER_H
 #define TIMERFORMATPARSER_H
 
+#include <QChar>
 #include <QObject>
 #include <QString>
 
