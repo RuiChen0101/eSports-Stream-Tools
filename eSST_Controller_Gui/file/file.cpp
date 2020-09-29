@@ -8,7 +8,7 @@ File::File(FileSource *source, QString const &path):
         }
         file.close();
     }else{
-        throw std::runtime_error("file " + path.toUtf8() + " open fail");
+        throw std::runtime_error(std::string("file ") + std::string(path.toUtf8()) + std::string(" open fail"));
     }
     connect(source, SIGNAL(contentUpdate()), this, SLOT(fileUpdate()));
 }
@@ -39,7 +39,7 @@ void File::setFileSource(FileSource *newSource){
 
 QString File::readAll(){
     if(!file.open(QIODevice::ReadOnly)){
-        throw std::runtime_error("file " + path.toUtf8() + " open fail");
+        throw std::runtime_error(std::string("file ") + std::string(path.toUtf8()) + std::string(" open fail"));
     }
     QTextStream inStream(&file);
     QString result = inStream.readAll();
