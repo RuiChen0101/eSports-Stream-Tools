@@ -3,6 +3,8 @@ CONFIG += qt warn_on depend_includepath testcase
 
 TEMPLATE = app
 
+CONFIG += c++11
+
 include(../eSST_Controller_Gui/eSST_Controller_Gui.pri)
 
 SOURCES +=  \

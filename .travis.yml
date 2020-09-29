@@ -1,10 +1,11 @@
-sudo: required
 os: linux
 dist: trusty
 language: cpp
 
 install:
-  - sudo apt-get install -y qt5-default qttools5-dev-tools
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update
+  - sudo apt-get install -y qt5-default qttools5-dev-tools gcc-7 g++-7
 
 script:
   - qmake "CONFIG+=debug" "CONFIG+=qml_debug" eSports_Stream_Tools.pro && make qmake_all
