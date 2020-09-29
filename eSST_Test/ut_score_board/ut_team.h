@@ -2,6 +2,7 @@
 #include "testexec.h"
 
 #include "score_board/team.h"
+#include "file/file_manager.h"
 #include <QSignalSpy>
 
 class UtTeam : public QObject{
@@ -57,7 +58,7 @@ private slots:
 
     void registe_file_test(){
         Team team(testId);
-        QDir dir = QDir::currentPath() + "/ScoreFiles";
+        QDir dir = FileManager::inst()->getScoreFileDir();
         team.registeNameFile();
         QVERIFY(dir.exists(testId + "Name.txt"));
         team.registePointFile();

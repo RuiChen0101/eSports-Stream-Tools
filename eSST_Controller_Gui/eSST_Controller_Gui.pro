@@ -2,10 +2,12 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = eSST_Controller_Gui
+TARGET = "eSST Controller"
 TEMPLATE = app
 
 CONFIG += c++11
+
+RC_ICONS = resource/icon.ico
 
 SOURCES += \
     file/config_file.cpp \
@@ -59,3 +61,6 @@ FORMS += \
 
 DISTFILES += \
     eSST_Controller_Gui.pri
+
+RESOURCES += \
+    resource.qrc

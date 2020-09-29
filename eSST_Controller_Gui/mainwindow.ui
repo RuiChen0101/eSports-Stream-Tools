@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>eSports Stream Tools v0</string>
+   <string>eSports Stream Tools v1.0</string>
   </property>
   <property name="animated">
    <bool>true</bool>
@@ -90,12 +90,6 @@
          <number>0</number>
         </property>
        </layout>
-      </widget>
-      <widget class="QWidget" name="network_tab">
-       <attribute name="title">
-        <string>Network </string>
-       </attribute>
-       <layout class="QGridLayout" name="network_tab_layout"/>
       </widget>
      </widget>
     </item>
@@ -197,16 +191,6 @@ QMenu::item:selected {
    </property>
    <property name="shortcutContext">
     <enum>Qt::WindowShortcut</enum>
-   </property>
-  </action>
-  <action name="action123">
-   <property name="text">
-    <string>123</string>
-   </property>
-  </action>
-  <action name="actionpages">
-   <property name="text">
-    <string>pages</string>
    </property>
   </action>
   <action name="action_show_score_file_folder">

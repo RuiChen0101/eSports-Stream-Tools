@@ -1,4 +1,5 @@
 #include "file_manager.h"
+#include <QDebug>
 
 FileManager* FileManager::inst(){
     static FileManager Inst;
@@ -7,9 +8,11 @@ FileManager* FileManager::inst(){
 
 FileManager::FileManager(QObject *parent):
     QObject(parent){
-    timerFileDir.setPath(QDir::currentPath() + "/TimerFiles");
-    scoreFileDir.setPath(QDir::currentPath() + "/ScoreFiles");
-    confileFileDir.setPath(QDir::currentPath() + "/ConfigFiles");
+    rootDir.setPath(QDir::homePath() + "/eSST");
+    timerFileDir.setPath(rootDir.path() + "/TimerFiles");
+    scoreFileDir.setPath(rootDir.path() + "/ScoreFiles");
+    confileFileDir.setPath(rootDir.path() + "/ConfigFiles");
+    prepareFolder(rootDir);
     prepareFolder(timerFileDir);
     prepareFolder(scoreFileDir);
     prepareFolder(confileFileDir);

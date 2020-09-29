@@ -26,6 +26,7 @@ private:
     FileManager(QObject *parent = nullptr);
     QString registeFile(FileSource*, QDir const &, QString const &);
     void prepareFolder(QDir const &);
+    QDir rootDir;
     QDir timerFileDir;
     QDir scoreFileDir;
     QDir confileFileDir;
