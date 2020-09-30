@@ -33,8 +33,8 @@ void TcpClient::startConnect(){
     socket.connectToHost(address, port);
     if(socket.waitForConnected(1000)){
         QJsonObject j;
-        j.insert("name", name);
-        j.insert("key", password);
+        j.insert(QString("name"), name);
+        j.insert(QString("key"), password);
         QString data = QJsonDocument(j).toJson(QJsonDocument::Compact);
         socket.write(data.toUtf8());
     }

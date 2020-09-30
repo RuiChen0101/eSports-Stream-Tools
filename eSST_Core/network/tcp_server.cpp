@@ -67,8 +67,8 @@ void TcpServer::newConnection(){
     if(newSocket->waitForReadyRead(1000)){
         QString vMessage = newSocket->readAll();
         QJsonDocument j = QJsonDocument::fromJson(vMessage.toUtf8());
-        if(j.isObject() && j["key"].toString() == password){
-            TcpConnection *connection = new TcpConnection(j["name"].toString(), newSocket);
+        if(j.isObject() && j[QString("key")].toString() == password){
+            TcpConnection *connection = new TcpConnection(j[QString("name")].toString(), newSocket);
             connect(connection, SIGNAL(disconnected()), this, SLOT(someOneDisconnected()));
             connections.push_back(connection);
             emit(connectionUpdate());
