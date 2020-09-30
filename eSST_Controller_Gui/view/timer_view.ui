@@ -467,11 +467,20 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="frame">
+     <bool>true</bool>
+    </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
     <property name="buttonSymbols">
      <enum>QAbstractSpinBox::UpDownArrows</enum>
+    </property>
+    <property name="accelerated">
+     <bool>false</bool>
+    </property>
+    <property name="showGroupSeparator" stdset="0">
+     <bool>false</bool>
     </property>
     <property name="currentSection">
      <enum>QDateTimeEdit::HourSection</enum>

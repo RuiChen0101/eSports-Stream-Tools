@@ -2,7 +2,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 TEMPLATE = subdirs
-SUBDIRS = eSST_Controller_Gui \
+SUBDIRS = eSST_Core \
+    eSST_Controller_Gui \
+    eSST_Reciver_Gui \
     eSST_Test
 INCLUDEPATH += ./
 

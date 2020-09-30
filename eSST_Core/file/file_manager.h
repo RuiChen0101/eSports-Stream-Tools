@@ -15,6 +15,7 @@ friend class UtFileManager;
 public:
     static FileManager* inst();
     ~FileManager();
+    QDir getRootDir() const;
     QDir getTimerFileDir() const;
     QDir getScoreFileDir() const;
     QDir getConfigFileDir() const;

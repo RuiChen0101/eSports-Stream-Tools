@@ -25,6 +25,11 @@ FileManager::~FileManager(){
     files.clear();
 }
 
+QDir FileManager::getRootDir() const{
+    prepareFolder(rootDir);
+    return rootDir;
+}
+
 QDir FileManager::getTimerFileDir() const{
     prepareFolder(timerFileDir);
     return timerFileDir;

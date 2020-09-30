@@ -1,7 +1,7 @@
 #include <QtTest>
 #include "testexec.h"
 
-class TestSetUp : public QObject{
+class TestInit : public QObject{
     Q_OBJECT
 
 private slots:

@@ -1,12 +1,9 @@
 #ifndef NETWORK_VIEW_H
 #define NETWORK_VIEW_H
 
-#include "network/tcp_server.h"
+#include "network/tcp_client.h"
 
-#include <QList>
-#include <QString>
 #include <QWidget>
-#include <QTableWidgetItem>
 
 namespace Ui {
 class NetworkView;
@@ -20,16 +17,14 @@ public:
     ~NetworkView();
 
 private slots:
-    void serverStatusUpdate(QString);
-    void serverConnectionUpdate();
     void networkSettingUpdate();
-    void startServer();
-    void stopServer();
+    void socketStateUpdate(QAbstractSocket::SocketState);
 
 private:
     void connectSignal();
     Ui::NetworkView *ui;
-    TcpServer server;
+    TcpClient client;
+
 };
 
 #endif // NETWORK_VIEW_H

@@ -5,15 +5,16 @@ TEMPLATE = app
 
 CONFIG += c++11
 
-include(../eSST_Controller_Gui/eSST_Controller_Gui.pri)
+include(../eSST_Core/eSST_Core.pri)
 
 SOURCES +=  \
     main.cpp \
     ut_file/fake_file_source.cpp
 
 HEADERS += \
+    testcleanup.h \
     testexec.h \
-    testsetup.h \
+    testinit.h \
     ut_file/fake_file_source.h \
     ut_file/ut_config_file.h \
     ut_file/ut_file.h \
