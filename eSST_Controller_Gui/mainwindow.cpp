@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent):
     statusBar = new StatusBar(ui->status_bar, this);
 
     ui->timer_tab_layout->addWidget(new TimerView(this));
+    ui->network_tab_layout->addWidget(new NetworkView(this));
     ui->score_tab_layout->addWidget(new ScoreBoardView(this));
     connectSignal();
 }

@@ -91,6 +91,28 @@
         </property>
        </layout>
       </widget>
+      <widget class="QWidget" name="network_tab">
+       <attribute name="title">
+        <string>Network</string>
+       </attribute>
+       <layout class="QGridLayout" name="network_tab_layout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>

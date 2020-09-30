@@ -29,6 +29,7 @@ SOURCES += \
     utility/signal_bus.cpp \
     utility/system_call.cpp \
     utility/timetick.cpp \
+    view/network_view.cpp \
     view/score_board_view.cpp \
     view/timer_view.cpp
 
@@ -51,11 +52,13 @@ HEADERS += \
     utility/signal_bus.h \
     utility/system_call.h \
     utility/timetick.h \
+    view/network_view.h \
     view/score_board_view.h \
     view/timer_view.h
 
 FORMS += \
     mainwindow.ui \
+    view/network_view.ui \
     view/score_board_view.ui \
     view/timer_view.ui
 
