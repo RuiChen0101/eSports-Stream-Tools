@@ -8,6 +8,7 @@
 #include <QString>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <QJsonObject>
 #include <QHostAddress>
 #include <QJsonDocument>
 
@@ -20,6 +21,7 @@ public:
     void setAddress(QString const &);
     void setPort(int);
     void setPassword(QString const &);
+    void kickConnection(int);
     QList<QList<QString>> getAllConnectionInfo() const;
     bool isReady();
 
@@ -33,7 +35,7 @@ private slots:
 
 signals:
     void connectionUpdate();
-    void statusUpdate(QString);
+    void logUpdate(QString);
 
 private:
     void clearConnection();

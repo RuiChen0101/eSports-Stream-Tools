@@ -37,11 +37,17 @@ void TcpServer::stop(){
     disconnect(&server, SIGNAL(newConnection()), this, SLOT(newConnection()));
 }
 
+void TcpServer::kickConnection(int index){
+    emit(logUpdate(connections[index]->getName()+" kicked"));
+    delete connections[index];
+    connections.removeAt(index);
+    emit(connectionUpdate());
+}
+
 QList<QList<QString>> TcpServer::getAllConnectionInfo() const{
     QList<QList<QString>> result;
     for(int i=0 ; i<connections.size() ; i++){
         QList<QString> row;
-        row.push_back(QString::number(i));
         row.push_back(connections[i]->getName());
         row.push_back(connections[i]->getAddress().toString());
         result.push_back(row);
@@ -53,6 +59,7 @@ void TcpServer::someOneDisconnected(){
     auto it = connections.begin();
     while(it != connections.end()){
         if(!(*it)->isConnected()){
+            emit(logUpdate((*it)->getName()+" disconnected"));
             delete (*it);
             it = connections.erase(it);
         }else{
@@ -66,13 +73,17 @@ void TcpServer::newConnection(){
     QTcpSocket *newSocket = server.nextPendingConnection();
     if(newSocket->waitForReadyRead(1000)){
         QString vMessage = newSocket->readAll();
-        QJsonDocument j = QJsonDocument::fromJson(vMessage.toUtf8());
-        if(j.isObject() && j[QString("key")].toString() == password){
-            TcpConnection *connection = new TcpConnection(j[QString("name")].toString(), newSocket);
-            connect(connection, SIGNAL(disconnected()), this, SLOT(someOneDisconnected()));
-            connections.push_back(connection);
-            emit(connectionUpdate());
-            return;
+        QJsonDocument doc = QJsonDocument::fromJson(vMessage.toUtf8());
+        if(doc.isObject()){
+            QJsonObject obj = doc.object();
+            if(obj["key"].toString() == password){
+                TcpConnection *connection = new TcpConnection(obj["name"].toString(), newSocket);
+                connect(connection, SIGNAL(disconnected()), this, SLOT(someOneDisconnected()));
+                connections.push_back(connection);
+                emit(logUpdate(connection->getName()+"@"+connection->getAddress().toString()+" connected"));
+                emit(connectionUpdate());
+                return;
+            }
         }
     }
     newSocket->disconnectFromHost();

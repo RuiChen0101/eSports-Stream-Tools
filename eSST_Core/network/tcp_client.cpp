@@ -47,6 +47,5 @@ void TcpClient::stopConnect(){
 }
 
 void TcpClient::stateChanged(QAbstractSocket::SocketState state){
-    qDebug() << state;
     emit(stateUpdate(state));
 }

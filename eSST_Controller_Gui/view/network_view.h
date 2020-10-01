@@ -20,11 +20,13 @@ public:
     ~NetworkView();
 
 private slots:
-    void serverStatusUpdate(QString);
+    void serverLogUpdate(QString);
     void serverConnectionUpdate();
     void networkSettingUpdate();
+    void kickConnection();
     void startServer();
     void stopServer();
+    void clearLog();
 
 private:
     void connectSignal();

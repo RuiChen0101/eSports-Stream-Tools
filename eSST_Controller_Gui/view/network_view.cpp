@@ -15,8 +15,8 @@ NetworkView::~NetworkView(){
     server.stop();
 }
 
-void NetworkView::serverStatusUpdate(QString log){
-    ui->log_display->appendPlainText(log+"\n");
+void NetworkView::serverLogUpdate(QString log){
+    ui->log_display->appendPlainText(log);
 }
 
 void NetworkView::serverConnectionUpdate(){
@@ -26,10 +26,10 @@ void NetworkView::serverConnectionUpdate(){
         int count = ui->connection_list->rowCount();
         ui->connection_list->insertRow(count);
         ui->connection_list->setItem(count, 0, new QTableWidgetItem(row[0]));
+        ui->connection_list->item(count, 0)->setTextAlignment(Qt::AlignCenter);
         ui->connection_list->setItem(count, 1, new QTableWidgetItem(row[1]));
-        ui->connection_list->setItem(count, 2, new QTableWidgetItem(row[2]));
+        ui->connection_list->item(count, 1)->setTextAlignment(Qt::AlignCenter);
     }
-    ui->connection_list->sortItems(0);
 }
 
 void NetworkView::networkSettingUpdate(){
@@ -37,6 +37,10 @@ void NetworkView::networkSettingUpdate(){
     server.setPort(ui->port_edit->text().toInt());
     server.setPassword(ui->connect_password_edit->text());
     ui->server_start_btn->setEnabled(server.isReady());
+}
+
+void NetworkView::kickConnection(){
+    server.kickConnection(ui->connection_list->currentIndex().row());
 }
 
 void NetworkView::startServer(){
@@ -56,6 +60,10 @@ void NetworkView::stopServer(){
     ui->connection_list->setRowCount(0);
 }
 
+void NetworkView::clearLog(){
+    ui->log_display->clear();
+}
+
 void NetworkView::connectSignal(){
     connect(ui->ip_edit, SIGNAL(textChanged(QString)), this, SLOT(networkSettingUpdate()));
     connect(ui->port_edit, SIGNAL(textChanged(QString)), this, SLOT(networkSettingUpdate()));
@@ -64,6 +72,10 @@ void NetworkView::connectSignal(){
     connect(ui->server_start_btn, SIGNAL(clicked(bool)), this, SLOT(startServer()));
     connect(ui->server_stop_btn, SIGNAL(clicked(bool)), this, SLOT(stopServer()));
 
+    connect(ui->connection_kick_btn, SIGNAL(clicked(bool)), this, SLOT(kickConnection()));
+
+    connect(ui->clear_log_btn, SIGNAL(clicked(bool)), this, SLOT(clearLog()));
+
     connect(&server, SIGNAL(connectionUpdate()), this, SLOT(serverConnectionUpdate()));
-    connect(&server, SIGNAL(statusUpdate(QString)), this, SLOT(serverStatusUpdate(QString)));
+    connect(&server, SIGNAL(logUpdate(QString)), this, SLOT(serverLogUpdate(QString)));
 }
