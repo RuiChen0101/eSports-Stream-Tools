@@ -2,7 +2,10 @@
 # eSports-Stream-Tools
 For eSports Streaming with timer, score board and more
 
-[![Build Status](https://travis-ci.org/RuiChen0101/eSports-Stream-Tools.svg?branch=master)](https://travis-ci.org/RuiChen0101/eSports-Stream-Tools)
+Branch | Build status
+------------ | -------------
+Master | [![Build Status](https://travis-ci.org/RuiChen0101/eSports-Stream-Tools.svg?branch=master)](https://travis-ci.org/RuiChen0101/eSports-Stream-Tools)
+Develop | [![Build Status](https://travis-ci.org/RuiChen0101/eSports-Stream-Tools.svg?branch=develop)](https://travis-ci.org/RuiChen0101/eSports-Stream-Tools)
 
 ## Get started
 
@@ -38,8 +41,9 @@ For eSports Streaming with timer, score board and more
   Point+1, Round+1 | add point or round point
   Best of N | set max round in Best of N format (max round = (N+1)/2)
   Use digit | display round points in digit mod
-  Round format | first char represent as padding point and second as obtained point
+  Round format | first char represent as pending point and second as obtained point
   Round Invert | reverse output of round point
 
 ## Reference
-Icons made by [Smashicons](https://smashicons.com/) from [www.flaticon.com](https://www.flaticon.com/)
+ - Idea inspire by [snaz](https://github.com/JimmyAppelt/Snaz)
+ - Icons made by [Smashicons](https://smashicons.com/) from [www.flaticon.com](https://www.flaticon.com/)
