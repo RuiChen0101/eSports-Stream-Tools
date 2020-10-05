@@ -4,6 +4,7 @@
 #include "timer/date_time_timer.h"
 #include "timer/countdown_timer.h"
 #include "timer/chrono_down_timer.h"
+#include "file/config_file.h"
 
 #include <QDebug>
 #include <QWidget>
@@ -16,7 +17,7 @@ class TimerView : public QWidget{
     Q_OBJECT
 
 public:
-    explicit TimerView(QWidget *parent = nullptr);
+    TimerView(QWidget *parent = nullptr);
     ~TimerView();
 
 private slots:
@@ -30,6 +31,7 @@ private slots:
     void reset();
 
 private:
+    void initShareConfig();
     void connectSignal();
     void registeOutputFile();
     void loadConfig();
@@ -39,6 +41,7 @@ private:
     DateTimeTimer dateTime;
     CountDownTimer countdown;
     ChronoDownTimer chronoDown;
+    ConfigFile config;
 };
 
 #endif // TIMERVIEW_H

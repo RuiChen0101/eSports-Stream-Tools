@@ -360,7 +360,7 @@
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLineEdit" name="datetim_live_output">
+   <widget class="QLineEdit" name="datetime_live_output">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -369,8 +369,16 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Microsoft JhengHei</family>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(215, 228, 242);</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLineEdit" name="countdown_live_output">
@@ -382,8 +390,16 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Microsoft JhengHei</family>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(215, 228, 242);</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLineEdit" name="chronodown_live_output">
@@ -395,8 +411,16 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Microsoft JhengHei</family>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(215, 228, 242);</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>
@@ -442,7 +466,7 @@
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>100</y>
+      <y>110</y>
       <width>131</width>
       <height>91</height>
      </rect>
@@ -464,7 +488,7 @@
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>50</y>
+      <y>60</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -485,7 +509,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>50</y>
+      <y>60</y>
       <width>151</width>
       <height>20</height>
      </rect>
@@ -501,7 +525,7 @@
     <property name="geometry">
      <rect>
       <x>300</x>
-      <y>50</y>
+      <y>60</y>
       <width>151</width>
       <height>20</height>
      </rect>
@@ -517,7 +541,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>100</y>
+      <y>120</y>
       <width>131</width>
       <height>91</height>
      </rect>
@@ -539,7 +563,7 @@
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>100</y>
+      <y>120</y>
       <width>91</width>
       <height>91</height>
      </rect>
@@ -560,7 +584,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>220</y>
+      <y>240</y>
       <width>151</width>
       <height>31</height>
      </rect>
@@ -588,7 +612,7 @@
     <property name="geometry">
      <rect>
       <x>300</x>
-      <y>220</y>
+      <y>240</y>
       <width>151</width>
       <height>31</height>
      </rect>
@@ -616,7 +640,7 @@
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>220</y>
+      <y>240</y>
       <width>91</width>
       <height>31</height>
      </rect>

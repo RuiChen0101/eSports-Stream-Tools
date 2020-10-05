@@ -1,13 +1,14 @@
 #include "network_view.h"
 #include "ui_network_view.h"
-#include "utility/config.h"
+#include "network/share_config.h"
 #include "utility/signal_bus.h"
 
 NetworkView::NetworkView(QWidget *parent) :
-    QWidget(parent), ui(new Ui::NetworkView){
+    QWidget(parent), ui(new Ui::NetworkView), config("NetworkViewConfig.json"){
     ui->setupUi(this);
 
     loadConfig();
+    initShareConfig();
     connectSignal();
     networkSettingUpdate();
 }
@@ -48,13 +49,13 @@ void NetworkView::kickConnection(){
 
 void NetworkView::clearMessage(){
     ui->message_edit->clear();
-    Config::inst()->insert("messages", ui->message_edit->toPlainText());
-    Config::inst()->commit();
+    ShareConfig::inst()->insert("messages", ui->message_edit->toPlainText());
+    ShareConfig::inst()->commit();
 }
 
 void NetworkView::sendMessage(){
-    Config::inst()->insert("messages", ui->message_edit->toPlainText());
-    Config::inst()->commit();
+    ShareConfig::inst()->insert("messages", ui->message_edit->toPlainText());
+    ShareConfig::inst()->commit();
 }
 
 void NetworkView::startServer(){
@@ -78,6 +79,11 @@ void NetworkView::clearLog(){
     ui->log_display->clear();
 }
 
+void NetworkView::initShareConfig(){
+    ShareConfig::inst()->insert("messages", ui->message_edit->toPlainText());
+    ShareConfig::inst()->commit();
+}
+
 void NetworkView::connectSignal(){
     connect(ui->ip_edit, SIGNAL(textChanged(QString)), this, SLOT(networkSettingUpdate()));
     connect(ui->port_edit, SIGNAL(textChanged(QString)), this, SLOT(networkSettingUpdate()));
@@ -95,16 +101,16 @@ void NetworkView::connectSignal(){
 
     connect(&server, SIGNAL(connectionUpdate()), this, SLOT(serverConnectionUpdate()));
     connect(&server, SIGNAL(logUpdate(QString)), this, SLOT(serverLogUpdate(QString)));
-    connect(Config::inst(), SIGNAL(configUpdate(QString)), &server, SLOT(broadcastMessage(QString)));
+    connect(ShareConfig::inst(), SIGNAL(configUpdate(QString)), &server, SLOT(broadcastMessage(QString)));
 }
 
 void NetworkView::loadConfig(){
-    if(Config::inst()->isLoaded()){
+    if(config.loadFile()){
         try{
-            ui->ip_edit->setText(Config::inst()->read("server_address").toString());
-            ui->port_edit->setText(Config::inst()->read("server_port").toString());
-            ui->connect_password_edit->setText(Config::inst()->read("server_password").toString());
-            ui->message_edit->setPlainText(Config::inst()->read("messages").toString());
+            ui->ip_edit->setText(config.read("server_address").toString());
+            ui->port_edit->setText(config.read("server_port").toString());
+            ui->connect_password_edit->setText(config.read("server_password").toString());
+            ui->message_edit->setPlainText(config.read("messages").toString());
         }catch(std::runtime_error &e){
             emit(SignalBus::inst()->systemMessageEvent("NetworkView load config fail"));
         }
@@ -114,9 +120,8 @@ void NetworkView::loadConfig(){
 }
 
 void NetworkView::saveConfig(){
-    Config::inst()->insert("server_address", ui->ip_edit->text());
-    Config::inst()->insert("server_port", ui->port_edit->text());
-    Config::inst()->insert("server_password", ui->connect_password_edit->text());
-    Config::inst()->insert("messages", ui->message_edit->toPlainText());
-    Config::inst()->commit();
+    config.insert("server_address", ui->ip_edit->text());
+    config.insert("server_port", ui->port_edit->text());
+    config.insert("server_password", ui->connect_password_edit->text());
+    config.insert("messages", ui->message_edit->toPlainText());
 }

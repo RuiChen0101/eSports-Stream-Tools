@@ -1,20 +1,15 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#ifndef SHARECONFIG_H
+#define SHARECONFIG_H
 
-#include <QFile>
 #include <QObject>
 #include <QJsonObject>
 #include <QJsonDocument>
 
-class Config : public QObject{
+class ShareConfig : public QObject{
     Q_OBJECT
-friend class UtConfig;
+friend class UtShareConfig;
 public:
-    static Config* inst();
-    ~Config();
-    bool isLoaded();
-    bool loadFile();
-    void saveFile();
+    static ShareConfig* inst();
     QString getConfigString();
     QJsonValue read(QString const &);
     void insert(QString const &, QJsonValue);
@@ -25,12 +20,10 @@ signals:
     void configUpdate(QString);
 
 private:
-    Config(QObject * = nullptr);
+    ShareConfig(QObject * = nullptr);
     QJsonObject mergeObject(QJsonObject const &, QJsonObject const &);
-    const static QString fileName;
-    QFile file;
     QJsonObject data;
     QJsonObject buffer;
 };
 
-#endif // CONFIG_H
+#endif // SHARECONFIG_H

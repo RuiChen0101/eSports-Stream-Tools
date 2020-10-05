@@ -1,5 +1,5 @@
 #include "tcp_client.h"
-#include "utility/config.h"
+#include "share_config.h"
 
 TcpClient::TcpClient(QObject *parent):
     QObject(parent), name(""){
@@ -32,7 +32,6 @@ bool TcpClient::isReady(){
 }
 
 void TcpClient::send(QString const &message){
-    qDebug() << message;
     if(socket.state() == QAbstractSocket::ConnectedState){
         socket.write(message.toUtf8());
     }
@@ -64,8 +63,9 @@ void TcpClient::stateChanged(QAbstractSocket::SocketState state){
 }
 
 void TcpClient::newMessage(){
-    QString message = socket.readAll();
-    qDebug()<<message;
-    Config::inst()->insert(message);
-    Config::inst()->commit();
+    while(socket.canReadLine()){
+        QString message = socket.readLine();
+        ShareConfig::inst()->insert(message);
+        ShareConfig::inst()->commit();
+    }
 }

@@ -18,9 +18,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    file/config_file.cpp \
     file/file.cpp \
     file/file_manager.cpp \
     file/file_source.cpp \
+    network/share_config.cpp \
     network/tcp_client.cpp \
     network/tcp_connection.cpp \
     network/tcp_server.cpp \
@@ -32,15 +34,16 @@ SOURCES += \
     timer/date_time_timer.cpp \
     timer/timer.cpp \
     timer/timer_format_parser.cpp \
-    utility/config.cpp \
     utility/signal_bus.cpp \
     utility/system_call.cpp \
     utility/timetick.cpp
 
 HEADERS += \
+    file/config_file.h \
     file/file.h \
     file/file_manager.h \
     file/file_source.h \
+    network/share_config.h \
     network/tcp_client.h \
     network/tcp_connection.h \
     network/tcp_server.h \
@@ -52,7 +55,6 @@ HEADERS += \
     timer/date_time_timer.h \
     timer/timer.h \
     timer/timer_format_parser.h \
-    utility/config.h \
     utility/signal_bus.h \
     utility/system_call.h \
     utility/timetick.h

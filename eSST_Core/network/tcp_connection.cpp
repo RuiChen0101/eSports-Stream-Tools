@@ -1,12 +1,12 @@
 #include "tcp_connection.h"
-#include "utility/config.h"
+#include "share_config.h"
 
 TcpConnection::TcpConnection(QString const &name, QTcpSocket *socket, QObject *parent):
     QObject(parent), socket(socket), name(name){
 
     connect(socket, SIGNAL(disconnected()), this, SIGNAL(disconnected()));
     connect(socket, SIGNAL(readyRead()), this, SLOT(newMessage()));
-    send(Config::inst()->getConfigString());
+    send(ShareConfig::inst()->getConfigString());
 }
 
 TcpConnection::~TcpConnection(){
@@ -32,13 +32,14 @@ bool TcpConnection::isConnected(){
 
 void TcpConnection::send(QString const &message){
     if(isConnected()){
-        socket->write(message.toUtf8());
+        QString send = message + QString("\n");
+        socket->write(send.toUtf8());
     }
 }
 
 void TcpConnection::newMessage(){
     QString message = socket->readAll();
     if(message == "sync"){
-        send(Config::inst()->getConfigString());
+        send(ShareConfig::inst()->getConfigString());
     }
 }

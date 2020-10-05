@@ -2,6 +2,7 @@
 #define NETWORK_VIEW_H
 
 #include "network/tcp_server.h"
+#include "file/config_file.h"
 
 #include <QList>
 #include <QString>
@@ -31,11 +32,13 @@ private slots:
     void clearLog();
 
 private:
+    void initShareConfig();
     void connectSignal();
     void loadConfig();
     void saveConfig();
     Ui::NetworkView *ui;
     TcpServer server;
+    ConfigFile config;
 };
 
 #endif // NETWORK_VIEW_H

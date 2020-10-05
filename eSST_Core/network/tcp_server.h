@@ -14,6 +14,7 @@
 
 class TcpServer : public QObject{
     Q_OBJECT
+friend class UtTcpServer;
 
 public:
     TcpServer(QObject * = nullptr);

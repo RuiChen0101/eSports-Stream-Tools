@@ -1,19 +1,17 @@
 #include "score_board_view.h"
 #include "ui_score_board_view.h"
-#include "utility/config.h"
+#include "network/share_config.h"
 #include "utility/signal_bus.h"
 
 ScoreBoardView::ScoreBoardView(QWidget *parent) :
-    QWidget(parent), ui(new Ui::ScoreBoardView), team1(1), team2(2){
+    QWidget(parent), ui(new Ui::ScoreBoardView), team1(1), team2(2), config("ScoreBoardViewConfig.json"){
     ui->setupUi(this);
     loadConfig();
+    initShareConfig();
     connectSignal();
     registeFiles();
     scoreBoardSettingUpdate();
     useDoubleDigitUpdate(ui->use_digits_check->checkState());
-    teamNameUpdate();
-    team1Update();
-    team2Update();
 }
 
 ScoreBoardView::~ScoreBoardView(){
@@ -24,25 +22,25 @@ ScoreBoardView::~ScoreBoardView(){
 void ScoreBoardView::team1Update(){
     ui->team1_point_display->display(team1.getPoint());
     ui->team1_round_point_display->setText(team1.getRound());
-    Config::inst()->insert("team1_point", team1.getPoint());
-    Config::inst()->insert("team1_round", team1.getRound());
-    Config::inst()->commit();
+    ShareConfig::inst()->insert("team1_point", team1.getPoint());
+    ShareConfig::inst()->insert("team1_round", team1.getRound());
+    ShareConfig::inst()->commit();
 }
 
 void ScoreBoardView::team2Update(){
     ui->team2_point_display->display(team2.getPoint());
     ui->team2_round_point_display->setText(team2.getRound());
-    Config::inst()->insert("team2_point", team2.getPoint());
-    Config::inst()->insert("team2_round", team2.getRound());
-    Config::inst()->commit();
+    ShareConfig::inst()->insert("team2_point", team2.getPoint());
+    ShareConfig::inst()->insert("team2_round", team2.getRound());
+    ShareConfig::inst()->commit();
 }
 
 void ScoreBoardView::teamNameUpdate(){
     team1.setTeamName(ui->team1_name_edit->text());
     team2.setTeamName(ui->team2_name_edit->text());
-    Config::inst()->insert("team1_name", ui->team1_name_edit->text());
-    Config::inst()->insert("team2_name", ui->team2_name_edit->text());
-    Config::inst()->commit();
+    ShareConfig::inst()->insert("team1_name", ui->team1_name_edit->text());
+    ShareConfig::inst()->insert("team2_name", ui->team2_name_edit->text());
+    ShareConfig::inst()->commit();
 }
 
 void ScoreBoardView::scoreBoardSettingUpdate(){
@@ -67,6 +65,16 @@ void ScoreBoardView::useDoubleDigitUpdate(int status){
 
     team1.settingUpdate();
     team2.settingUpdate();
+}
+
+void ScoreBoardView::initShareConfig(){
+    ShareConfig::inst()->insert("team1_name", ui->team1_name_edit->text());
+    ShareConfig::inst()->insert("team1_point", team1.getPoint());
+    ShareConfig::inst()->insert("team1_round", team1.getRound());
+    ShareConfig::inst()->insert("team2_name", ui->team2_name_edit->text());
+    ShareConfig::inst()->insert("team2_point", team2.getPoint());
+    ShareConfig::inst()->insert("team2_round", team2.getRound());
+    ShareConfig::inst()->commit();
 }
 
 void ScoreBoardView::registeFiles(){
@@ -104,15 +112,15 @@ void ScoreBoardView::connectSignal(){
 }
 
 void ScoreBoardView::loadConfig(){
-    if(Config::inst()->isLoaded()){
+    if(config.loadFile()){
         try{
-            ui->team1_name_edit->setText(Config::inst()->read("team1_name").toString());
-            ui->team2_name_edit->setText(Config::inst()->read("team2_name").toString());
-            ui->use_digits_check->setChecked(Config::inst()->read("use_digits").toBool());
-            ui->round_format->setText(Config::inst()->read("round_format").toString());
-            ui->team1_round_invert_check->setChecked(Config::inst()->read("team1_round_invert").toBool());
-            ui->team2_round_invert_check->setChecked(Config::inst()->read("team2_round_invert").toBool());
-            ui->best_of_edit->setText(Config::inst()->read("best_of").toString());
+            ui->team1_name_edit->setText(config.read("team1_name").toString());
+            ui->team2_name_edit->setText(config.read("team2_name").toString());
+            ui->use_digits_check->setChecked(config.read("use_digits").toBool());
+            ui->round_format->setText(config.read("round_format").toString());
+            ui->team1_round_invert_check->setChecked(config.read("team1_round_invert").toBool());
+            ui->team2_round_invert_check->setChecked(config.read("team2_round_invert").toBool());
+            ui->best_of_edit->setText(config.read("best_of").toString());
         }catch(std::runtime_error &e){
             emit(SignalBus::inst()->systemMessageEvent("ScoreBoardView load config fail"));
         }
@@ -122,12 +130,11 @@ void ScoreBoardView::loadConfig(){
 }
 
 void ScoreBoardView::saveConfig(){
-    Config::inst()->insert("team1_name", ui->team1_name_edit->text());
-    Config::inst()->insert("team2_name", ui->team2_name_edit->text());
-    Config::inst()->insert("use_digits", ui->use_digits_check->isChecked());
-    Config::inst()->insert("round_format", ui->round_format->text());
-    Config::inst()->insert("team1_round_invert", ui->team1_round_invert_check->isChecked());
-    Config::inst()->insert("team2_round_invert", ui->team2_round_invert_check->isChecked());
-    Config::inst()->insert("best_of", ui->best_of_edit->text());
-    Config::inst()->commit();
+    config.insert("team1_name", ui->team1_name_edit->text());
+    config.insert("team2_name", ui->team2_name_edit->text());
+    config.insert("use_digits", ui->use_digits_check->isChecked());
+    config.insert("round_format", ui->round_format->text());
+    config.insert("team1_round_invert", ui->team1_round_invert_check->isChecked());
+    config.insert("team2_round_invert", ui->team2_round_invert_check->isChecked());
+    config.insert("best_of", ui->best_of_edit->text());
 }

@@ -1,15 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "utility/config.h"
 #include "file/file_manager.h"
 
 MainWindow::MainWindow(QWidget *parent):
     QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
 
-    FileManager::changeRootFolder("/eSST/eSST_Reciver");
-
-    Config::inst()->loadFile();
+    FileManager::changeRootFolder("/eSST/eSST_Controller");
 
     menuBar = new MenuBar(this);
     statusBar = new StatusBar(ui->status_bar, this);
