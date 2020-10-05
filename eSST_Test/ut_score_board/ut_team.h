@@ -11,7 +11,7 @@ class UtTeam : public QObject{
 private slots:
     void consdtruct_with_id_test(){
         Team team(0);
-        QCOMPARE(team.id, 0);
+        QCOMPARE(team.id, quint8(0));
     }
 
     void setTeamName_test(){
