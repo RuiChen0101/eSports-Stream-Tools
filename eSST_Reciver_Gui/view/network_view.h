@@ -17,6 +17,8 @@ public:
     ~NetworkView();
 
 private slots:
+    void disconnected();
+    void configUpdate();
     void networkSettingUpdate();
     void socketStateUpdate(QAbstractSocket::SocketState);
 

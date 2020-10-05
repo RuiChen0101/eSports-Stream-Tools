@@ -10,18 +10,18 @@ class UtTeam : public QObject{
 
 private slots:
     void consdtruct_with_id_test(){
-        Team team(testId);
-        QCOMPARE(team.id, testId);
+        Team team(0);
+        QCOMPARE(team.id, 0);
     }
 
     void setTeamName_test(){
-        Team team(testId);
+        Team team(0);
         team.setTeamName("testName");
         QCOMPARE(team.teamName.getString(), QString("testName"));
     }
 
     void setInvert_test(){
-        Team team(testId);
+        Team team(0);
         team.addRound();
         QCOMPARE(team.getRound(), QString("●○"));
         team.setInvert(true);
@@ -29,7 +29,7 @@ private slots:
     }
 
     void addPoint_getPoint_resetPoint_test(){
-        Team team(testId);
+        Team team(0);
         QCOMPARE(team.getPoint(), qint8(0));
         QSignalSpy spy(&team, SIGNAL(contentUpdate()));
         team.addPoint();
@@ -43,7 +43,7 @@ private slots:
     }
 
     void addRound_getRound_resetPoint_test(){
-        Team team(testId);
+        Team team(0);
         QCOMPARE(team.getRound(), QString("○○"));
         QSignalSpy spy(&team, SIGNAL(contentUpdate()));
         team.addRound();
@@ -57,18 +57,15 @@ private slots:
     }
 
     void registe_file_test(){
-        Team team(testId);
+        Team team(0);
         QDir dir = FileManager::inst()->getScoreFileDir();
         team.registeNameFile();
-        QVERIFY(dir.exists(testId + "Name.txt"));
+        QVERIFY(dir.exists("team0Name.txt"));
         team.registePointFile();
-        QVERIFY(dir.exists(testId + "Points.txt"));
+        QVERIFY(dir.exists("team0Points.txt"));
         team.registeRoundFile();
-        QVERIFY(dir.exists(testId + "RoundPoints.txt"));
+        QVERIFY(dir.exists("team0RoundPoints.txt"));
     }
-
-private:
-    const QString testId = "testTeam";
 };
 
 ADD_TEST(UtTeam)

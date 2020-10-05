@@ -150,6 +150,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="locale">
+     <locale language="Chinese" country="Taiwan"/>
+    </property>
     <property name="inputMask">
      <string/>
     </property>
@@ -281,13 +284,13 @@
     </column>
    </widget>
   </widget>
-  <widget class="QGroupBox" name="groupBox">
+  <widget class="QGroupBox" name="log_group">
    <property name="geometry">
     <rect>
      <x>310</x>
-     <y>280</y>
+     <y>320</y>
      <width>451</width>
-     <height>181</height>
+     <height>141</height>
     </rect>
    </property>
    <property name="title">
@@ -299,7 +302,7 @@
       <x>10</x>
       <y>20</y>
       <width>431</width>
-      <height>121</height>
+      <height>81</height>
      </rect>
     </property>
     <property name="readOnly">
@@ -310,6 +313,68 @@
     <property name="geometry">
      <rect>
       <x>340</x>
+      <y>110</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft JhengHei</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Clear</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="broadcast_message_group">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>130</y>
+     <width>451</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Broadcast Message</string>
+   </property>
+   <widget class="QPlainTextEdit" name="message_edit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>431</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="send_message_btn">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>150</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft JhengHei</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Send</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="clear_message_btn">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
       <y>150</y>
       <width>101</width>
       <height>23</height>

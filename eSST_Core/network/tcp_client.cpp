@@ -1,8 +1,10 @@
 #include "tcp_client.h"
+#include "utility/config.h"
 
 TcpClient::TcpClient(QObject *parent):
     QObject(parent), name(""){
     connect(&socket, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(stateChanged(QAbstractSocket::SocketState)));
+    connect(&socket, SIGNAL(readyRead()), this, SLOT(newMessage()));
 }
 
 TcpClient::~TcpClient(){
@@ -26,7 +28,24 @@ void TcpClient::setName(QString const &name){
 }
 
 bool TcpClient::isReady(){
-    return address.protocol() != -1 && port < 65536 && port >= 0 && name != "";
+    return address.protocol() != -1 && port <= 65535 && port >= 0 && name != "";
+}
+
+void TcpClient::send(QString const &message){
+    qDebug() << message;
+    if(socket.state() == QAbstractSocket::ConnectedState){
+        socket.write(message.toUtf8());
+    }
+}
+
+void TcpClient::forceSync(){
+    send("sync");
+}
+
+void TcpClient::stopConnect(){
+    if(socket.state() == QAbstractSocket::ConnectedState || socket.state() == QAbstractSocket::ConnectingState){
+        socket.disconnectFromHost();
+    }
 }
 
 void TcpClient::startConnect(){
@@ -40,12 +59,13 @@ void TcpClient::startConnect(){
     }
 }
 
-void TcpClient::stopConnect(){
-    if(socket.state() == QAbstractSocket::ConnectedState || socket.state() == QAbstractSocket::ConnectingState){
-        socket.disconnectFromHost();
-    }
-}
-
 void TcpClient::stateChanged(QAbstractSocket::SocketState state){
     emit(stateUpdate(state));
+}
+
+void TcpClient::newMessage(){
+    QString message = socket.readAll();
+    qDebug()<<message;
+    Config::inst()->insert(message);
+    Config::inst()->commit();
 }

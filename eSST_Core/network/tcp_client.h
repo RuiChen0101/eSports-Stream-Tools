@@ -11,6 +11,8 @@
 
 class TcpClient : public QObject{
     Q_OBJECT
+friend class UtTcpClient;
+
 public:
     TcpClient(QObject *parent = nullptr);
     ~TcpClient();
@@ -19,14 +21,20 @@ public:
     void setPassword(QString const &);
     void setName(QString const &);
     bool isReady();
+    void send(QString const &);
 
 public slots:
-    void startConnect();
+    void forceSync();
     void stopConnect();
+    void startConnect();
     void stateChanged(QAbstractSocket::SocketState);
+
+private slots:
+    void newMessage();
 
 signals:
     void stateUpdate(QAbstractSocket::SocketState);
+
 private:
     QHostAddress address;
     QTcpSocket socket;

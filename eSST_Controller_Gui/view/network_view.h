@@ -24,12 +24,16 @@ private slots:
     void serverConnectionUpdate();
     void networkSettingUpdate();
     void kickConnection();
+    void clearMessage();
+    void sendMessage();
     void startServer();
     void stopServer();
     void clearLog();
 
 private:
     void connectSignal();
+    void loadConfig();
+    void saveConfig();
     Ui::NetworkView *ui;
     TcpServer server;
 };

@@ -1,16 +1,16 @@
 #include "timer_view.h"
 #include "ui_timer_view.h"
 #include "file/file_manager.h"
+#include "utility/config.h"
 #include "utility/timetick.h"
 #include "utility/signal_bus.h"
 
 TimerView::TimerView(QWidget *parent) :
-    QWidget(parent), ui(new Ui::TimerView), config("TimerViewConfig.json"){
+    QWidget(parent), ui(new Ui::TimerView){
     ui->setupUi(this);
     loadConfig();
     connectSignal();
     registeOutputFile();
-    ui->countdown_target->setDateTime(QDateTime::currentDateTime());
     dateTimeSettingUpdate();
     countDownSettingUpdate();
     chronoDownSettingUpdate();
@@ -168,22 +168,21 @@ QString TimerView::registeFlexOutputFile(int index, QString const &fileName){
 }
 
 void TimerView::loadConfig(){
-    if(config.loadFile()){
+    if(Config::inst()->isLoaded()){
         try{
-            ui->flex_output1_select->setCurrentIndex(config.read("flex1_select").toInt());
-            ui->flex_output2_select->setCurrentIndex(config.read("flex2_select").toInt());
-            ui->datetime_formate_edit->setText(config.read("date_time_format").toString());
-            ui->countdown_formate_edit->setText(config.read("countdown_format").toString());
-            ui->countdown_timeout_msg_edit->setText(config.read("countdown_timeout_msg").toString());
-            ui->chronodown_formate_edit->setText(config.read("chrono_down_format").toString());
-            ui->chronodown_timeout_msg_edit->setText(config.read("chrono_down_timeout_msg").toString());
-            ui->chronodown_target->setTime(
-                QTime(
-                    config.read("chrono_down_target_hour").toInt(),
-                    config.read("chrono_down_target_min").toInt(),
-                    config.read("chrono_down_target_sec").toInt()
-            ));
-            return;
+            ui->flex_output1_select->setCurrentIndex(Config::inst()->read("flex1_select").toInt());
+            ui->flex_output2_select->setCurrentIndex(Config::inst()->read("flex2_select").toInt());
+            ui->datetime_formate_edit->setText(Config::inst()->read("date_time_format").toString());
+            ui->countdown_formate_edit->setText(Config::inst()->read("countdown_format").toString());
+            ui->countdown_timeout_msg_edit->setText(Config::inst()->read("countdown_timeout_msg").toString());
+            QJsonArray countdownTarget = Config::inst()->read("countdown_target").toArray();
+            QDate countdownDate(countdownTarget[0].toInt(), countdownTarget[1].toInt(), countdownTarget[2].toInt());
+            QTime countdownTime(countdownTarget[3].toInt(), countdownTarget[4].toInt(), countdownTarget[5].toInt());
+            ui->countdown_target->setDateTime(QDateTime(countdownDate, countdownTime));
+            ui->chronodown_formate_edit->setText(Config::inst()->read("chrono_down_format").toString());
+            ui->chronodown_timeout_msg_edit->setText(Config::inst()->read("chrono_down_timeout_msg").toString());
+            QJsonArray chronoDownTarget = Config::inst()->read("chrono_down_target").toArray();
+            ui->chronodown_target->setTime(QTime(chronoDownTarget[0].toInt(), chronoDownTarget[1].toInt(), chronoDownTarget[2].toInt()));
         }catch(std::runtime_error &e){
             emit(SignalBus::inst()->systemMessageEvent("TimerView load config fail"));
         }
@@ -193,14 +192,27 @@ void TimerView::loadConfig(){
 }
 
 void TimerView::saveConfig(){
-    config.insert("flex1_select", ui->flex_output1_select->currentIndex());
-    config.insert("flex2_select", ui->flex_output2_select->currentIndex());
-    config.insert("date_time_format", ui->datetime_formate_edit->text());
-    config.insert("countdown_format", ui->countdown_formate_edit->text());
-    config.insert("countdown_timeout_msg", ui->countdown_timeout_msg_edit->text());
-    config.insert("chrono_down_format", ui->chronodown_formate_edit->text());
-    config.insert("chrono_down_timeout_msg",ui->chronodown_timeout_msg_edit->text());
-    config.insert("chrono_down_target_hour", ui->chronodown_target->time().hour());
-    config.insert("chrono_down_target_min", ui->chronodown_target->time().minute());
-    config.insert("chrono_down_target_sec", ui->chronodown_target->time().second());
+    Config::inst()->insert("flex1_select", ui->flex_output1_select->currentIndex());
+    Config::inst()->insert("flex2_select", ui->flex_output2_select->currentIndex());
+    Config::inst()->insert("date_time_format", ui->datetime_formate_edit->text());
+    Config::inst()->insert("countdown_format", ui->countdown_formate_edit->text());
+    Config::inst()->insert("countdown_timeout_msg", ui->countdown_timeout_msg_edit->text());
+    Config::inst()->insert("countdown_double_digit", ui->countdown_double_digit_check->isChecked());
+    QJsonArray countdown_target;
+    countdown_target.push_back(ui->countdown_target->date().year());
+    countdown_target.push_back(ui->countdown_target->date().month());
+    countdown_target.push_back(ui->countdown_target->date().day());
+    countdown_target.push_back(ui->countdown_target->time().hour());
+    countdown_target.push_back(ui->countdown_target->time().minute());
+    countdown_target.push_back(ui->countdown_target->time().second());
+    Config::inst()->insert("countdown_target", countdown_target);
+    Config::inst()->insert("chrono_down_format", ui->chronodown_formate_edit->text());
+    Config::inst()->insert("chrono_down_timeout_msg",ui->chronodown_timeout_msg_edit->text());
+    Config::inst()->insert("chrono_down_double_digit", ui->chronodown_double_digit_check->isChecked());
+    QJsonArray chrono_target;
+    chrono_target.push_back(ui->chronodown_target->time().hour());
+    chrono_target.push_back(ui->chronodown_target->time().minute());
+    chrono_target.push_back(ui->chronodown_target->time().second());
+    Config::inst()->insert("chrono_down_target", chrono_target);
+    Config::inst()->commit();
 }

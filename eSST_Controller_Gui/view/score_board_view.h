@@ -4,8 +4,6 @@
 #include "score_board/team.h"
 #include "score_board/round.h"
 
-#include "file/config_file.h"
-
 #include <QWidget>
 
 namespace Ui {
@@ -35,7 +33,6 @@ private:
     Ui::ScoreBoardView *ui;
     Team team1;
     Team team2;
-    ConfigFile config;
 };
 
 #endif // SCORE_BOARD_VIEW_H

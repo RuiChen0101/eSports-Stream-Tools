@@ -1,7 +1,7 @@
 #include "team.h"
 #include "file/file_manager.h"
 
-Team::Team(QString const &id, QObject *parent):
+Team::Team(quint8 id, QObject *parent):
     QObject(parent), id(id){
 
 }
@@ -29,15 +29,15 @@ QString Team::getRound(){
 }
 
 QString Team::registeNameFile(){
-    return FileManager::inst()->registeScoreFile(&teamName, id + "Name.txt");
+    return FileManager::inst()->registeScoreFile(&teamName, "team" + QString::number(id) + "Name.txt");
 }
 
 QString Team::registePointFile(){
-    return FileManager::inst()->registeScoreFile(&points, id + "Points.txt");
+    return FileManager::inst()->registeScoreFile(&points, "team" + QString::number(id) + "Points.txt");
 }
 
 QString Team::registeRoundFile(){
-    return FileManager::inst()->registeScoreFile(&rounds, id + "RoundPoints.txt");
+    return FileManager::inst()->registeScoreFile(&rounds, "team" + QString::number(id) + "RoundPoints.txt");
 }
 
 void Team::addPoint(){

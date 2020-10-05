@@ -26,6 +26,7 @@ public:
     bool isReady();
 
 public slots:
+    void broadcastMessage(QString);
     void start();
     void stop();
 

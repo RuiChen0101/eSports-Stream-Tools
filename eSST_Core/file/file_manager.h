@@ -15,6 +15,7 @@ friend class UtFileManager;
 public:
     static FileManager* inst();
     ~FileManager();
+    static void changeRootFolder(QString const &);
     QDir getRootDir() const;
     QDir getTimerFileDir() const;
     QDir getScoreFileDir() const;
@@ -27,6 +28,7 @@ private:
     FileManager(QObject *parent = nullptr);
     QString registeFile(FileSource*, QDir const &, QString const &);
     void prepareFolder(QDir const &) const;
+    static QString folder;
     QDir rootDir;
     QDir timerFileDir;
     QDir scoreFileDir;

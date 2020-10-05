@@ -17,14 +17,12 @@ class TimerFormatParser{
 friend class UtTimerFormatParser;
 
 public:
-    enum Flag{
-        DOUBLE_DIGIT = 0x01
-    };
     TimerFormatParser();
     void setFormat(QString const &);
     void setSecond(qint64 const &);
     void setDoubleDigit(bool);
     QString getString();
+
 private:
     QString numberToString(quint8);
     bool useDoubleDigit;

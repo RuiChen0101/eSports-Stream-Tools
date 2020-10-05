@@ -1,5 +1,11 @@
 #include "file_manager.h"
 
+QString FileManager::folder = "/eSST";
+
+void FileManager::changeRootFolder(QString const &folder){
+    FileManager::folder = folder;
+}
+
 FileManager* FileManager::inst(){
     static FileManager Inst;
     return &Inst;
@@ -7,7 +13,7 @@ FileManager* FileManager::inst(){
 
 FileManager::FileManager(QObject *parent):
     QObject(parent){
-    rootDir.setPath(QDir::homePath() + "/eSST");
+    rootDir.setPath(QDir::homePath() + FileManager::folder);
     timerFileDir.setPath(rootDir.path() + "/TimerFiles");
     scoreFileDir.setPath(rootDir.path() + "/ScoreFiles");
     configFileDir.setPath(rootDir.path() + "/ConfigFiles");

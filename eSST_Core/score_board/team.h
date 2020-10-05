@@ -11,8 +11,10 @@
 class Team : public QObject{
     Q_OBJECT
 friend class UtTeam;
+
 public:
-    Team(QString const &, QObject *parent = nullptr);
+    Team(quint8, QObject *parent = nullptr);
+    quint8 getId();
     qint8 getPoint();
     QString getRound();
     QString registeNameFile();
@@ -21,15 +23,18 @@ public:
     void setTeamName(QString const &);
     void setInvert(bool);
     void settingUpdate();
+
 public slots:
     void addPoint();
     void addRound();
     void resetPoint();
     void resetRound();
+
 signals:
     void contentUpdate();
+
 private:
-    QString id;
+    quint8 id;
     Point points;
     Round rounds;
     FileSource teamName;

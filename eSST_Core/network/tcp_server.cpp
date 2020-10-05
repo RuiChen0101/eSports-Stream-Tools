@@ -26,6 +26,12 @@ bool TcpServer::isReady(){
     return address.protocol() != -1 && port < 65536 && port >= 0;
 }
 
+void TcpServer::broadcastMessage(QString message){
+    foreach(TcpConnection *connection, connections){
+        connection->send(message);
+    }
+}
+
 void TcpServer::start(){
     server.listen(address, quint16(port));
     connect(&server, SIGNAL(newConnection()), this, SLOT(newConnection()));
@@ -38,6 +44,7 @@ void TcpServer::stop(){
 }
 
 void TcpServer::kickConnection(int index){
+    if(index < 0 || index > connections.size()) return;
     emit(logUpdate(connections[index]->getName()+" kicked"));
     delete connections[index];
     connections.removeAt(index);

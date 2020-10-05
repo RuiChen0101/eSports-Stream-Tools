@@ -1,9 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "file/file_manager.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow){
+MainWindow::MainWindow(QWidget *parent):
+    QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
+
+    FileManager::changeRootFolder("/eSST/eSST_Reciver");
 
     menuBar = new MenuBar(this);
     statusBar = new StatusBar(ui->status_bar, this);
@@ -14,6 +17,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow(){
     delete ui;
+    delete menuBar;
+    delete statusBar;
 }
 
 void MainWindow::connectSignal(){

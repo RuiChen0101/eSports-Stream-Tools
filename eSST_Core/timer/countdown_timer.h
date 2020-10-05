@@ -11,6 +11,7 @@
 
 class CountDownTimer : public Timer, public FileSource{
 friend class UtCountDownTimer;
+
 public:
     enum Status{
         START,
@@ -25,10 +26,11 @@ public:
     void setTimeoutMsg(QString const &);
     void setDoubleDigit(bool);
     void timeUpdate() override;
+
 private:
     Status status = STOP;
-    QString timeoutMsg;
     qint64 remainSec;
+    QString timeoutMsg;
     TimerFormatParser parser;
 };
 
