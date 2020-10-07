@@ -6,6 +6,7 @@
 #include "timer/chrono_down_timer.h"
 #include "network/tcp_client.h"
 #include "file/config_file.h"
+#include "file/file_source.h"
 
 #include <QWidget>
 
@@ -24,10 +25,14 @@ private slots:
     void timeUpdate();
     void disconnected();
     void configUpdate();
+    void scoreBoardUpdate();
+    void fileOutputCheck(int);
     void networkSettingUpdate();
     void socketStateUpdate(QAbstractSocket::SocketState);
 
 private:
+    void deregisteOutputFile();
+    void registeOutputFile();
     void connectSignal();
     void loadConfig();
     void saveConfig();
@@ -37,6 +42,8 @@ private:
     DateTimeTimer dateTime;
     CountDownTimer countdown;
     ChronoDownTimer chronoDown;
+    FileSource team1Name, team1Point, team1Round;
+    FileSource team2Name, team2Point, team2Round;
 };
 
 #endif // NETWORK_VIEW_H

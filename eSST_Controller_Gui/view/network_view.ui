@@ -349,6 +349,12 @@
       <height>121</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Microsoft JhengHei</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="readOnly">
      <bool>false</bool>
     </property>

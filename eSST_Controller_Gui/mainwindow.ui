@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>eSports Stream Tools-Controller v1.0</string>
+   <string>eSports Stream Tools-Controller v1.1</string>
   </property>
   <property name="animated">
    <bool>true</bool>

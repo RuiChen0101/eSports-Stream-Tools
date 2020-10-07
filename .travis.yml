@@ -1,8 +1,7 @@
 os: linux
 language: cpp
-dist: xenial
+dist: bionic
 compiler: gcc
-sudo: true
 
 before_install:
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
