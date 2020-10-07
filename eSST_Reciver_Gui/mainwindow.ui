@@ -79,6 +79,7 @@ QMenu::item:selected {
      <string>File</string>
     </property>
     <addaction name="action_setting"/>
+    <addaction name="action_show_file_folder"/>
    </widget>
    <widget class="QMenu" name="menu_help">
     <property name="styleSheet">
@@ -113,6 +114,11 @@ QMenu::item:selected {
   <action name="action_github_page">
    <property name="text">
     <string>Github page</string>
+   </property>
+  </action>
+  <action name="action_show_file_folder">
+   <property name="text">
+    <string>Show File Folder</string>
    </property>
   </action>
  </widget>

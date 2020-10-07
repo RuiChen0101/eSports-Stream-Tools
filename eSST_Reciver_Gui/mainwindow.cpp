@@ -23,4 +23,5 @@ MainWindow::~MainWindow(){
 
 void MainWindow::connectSignal(){
     connect(ui->action_github_page, SIGNAL(triggered()), menuBar, SLOT(githubPageToggled()));
+    connect(ui->action_show_file_folder, SIGNAL(triggered()), menuBar, SLOT(showFileFolderToggled()));
 }

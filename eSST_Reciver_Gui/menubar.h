@@ -12,6 +12,7 @@ class MenuBar : public QObject{
 public:
     MenuBar(QObject *parent = nullptr);
 public slots:
+    void showFileFolderToggled();
     void githubPageToggled();
     void settingToggled();
 private:
