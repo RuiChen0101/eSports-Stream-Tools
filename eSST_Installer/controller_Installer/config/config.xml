@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>eSports Stream Tools Controller Installer</Name>
+    <Version>1.1.0</Version>
+    <Title>eSports Stream Tools Controller</Title>
+    <Publisher>TTES ruichen</Publisher>
+    <StartMenuDir>eSports Stream Tools Controller</StartMenuDir>
+    <TargetDir>@ApplicationsDir@/eSports Stream Tools Controller</TargetDir>
+</Installer>

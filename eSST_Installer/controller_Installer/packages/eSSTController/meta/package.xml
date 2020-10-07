@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package>
     <DisplayName>eSST Controller</DisplayName>
-    <Description>eSST Controller, game info controller for eSports stream event.</Description>
+    <Description>eSST Controller, controller for eSports stream event.</Description>
     <Version>1.1.0</Version>
     <ReleaseDate>2020-10-08</ReleaseDate>
     <Default>true</Default>

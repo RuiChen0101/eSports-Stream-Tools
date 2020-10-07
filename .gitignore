@@ -74,4 +74,5 @@ build/
 
 #Installer
 eSST_Installer/*.exe
-eSST_Installer/*/data/*
+eSST_Installer/controller_Installer/packages/eSSTController/data
+eSST_Installer/reciver_Installer/packages/eSSTReciver/data
