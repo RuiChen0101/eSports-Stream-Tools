@@ -2,7 +2,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = "eSST Reciver"
+TARGET = "eSST Receiver"
 TEMPLATE = app
 
 CONFIG += c++11

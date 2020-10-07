@@ -4,7 +4,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 TEMPLATE = subdirs
 SUBDIRS = eSST_Core \
     eSST_Controller_Gui \
-    eSST_Reciver_Gui \
+    eSST_Receiver_Gui \
     eSST_Test
 INCLUDEPATH += ./
 

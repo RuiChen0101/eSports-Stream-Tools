@@ -37,7 +37,7 @@ Component.prototype.createOperations = function()
     component.createOperations();
 
     if (systemInfo.productType === "windows") {
-        component.addOperation("CreateShortcut", "@TargetDir@/eSST Reciver.exe", "@StartMenuDir@/eSST Reciver.lnk", "workingDirectory=@TargetDir@", "iconPath=@TargetDir@/resource/icon.ico", "description=Open eSST Reciver");
-        component.addOperation("CreateShortcut", "@TargetDir@/eSST Reciver.exe", "@DesktopDir@/eSST Reciver.lnk", "workingDirectory=@TargetDir@", "iconPath=@TargetDir@/resource/icon.ico", "description=Open eSST Reciver");
+        component.addOperation("CreateShortcut", "@TargetDir@/eSST Receiver.exe", "@StartMenuDir@/eSST Receiver.lnk", "workingDirectory=@TargetDir@", "iconPath=@TargetDir@/resource/icon.ico", "description=Open eSST Receiver");
+        component.addOperation("CreateShortcut", "@TargetDir@/eSST Receiver.exe", "@DesktopDir@/eSST Receiver.lnk", "workingDirectory=@TargetDir@", "iconPath=@TargetDir@/resource/icon.ico", "description=Open eSST Receiver");
     }
 }

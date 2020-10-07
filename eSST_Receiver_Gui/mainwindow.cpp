@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent):
     QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
 
-    FileManager::changeRootFolder("/eSST/eSST_Reciver");
+    FileManager::changeRootFolder("/eSST/eSST_Receiver");
 
     menuBar = new MenuBar(this);
     statusBar = new StatusBar(ui->status_bar, this);

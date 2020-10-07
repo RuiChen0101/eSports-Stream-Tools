@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Installer>
-    <Name>eSports Stream Tools Reciver Installer</Name>
-    <Version>1.0.0</Version>
-    <Title>eSports Stream Tools Reciver</Title>
-    <Publisher>TTES ruichen</Publisher>
-    <StartMenuDir>eSports Stream Tools Reciver</StartMenuDir>
-    <TargetDir>@ApplicationsDir@/eSports Stream Tools Reciver</TargetDir>
-</Installer>

@@ -183,7 +183,7 @@ void NetworkView::loadConfig(){
             ui->ip_edit->setText(config.read("host_address").toString());
             ui->port_edit->setText(config.read("host_port").toString());
             ui->connect_password_edit->setText(config.read("host_password").toString());
-            ui->name_edit->setText(config.read("reciver_name").toString());
+            ui->name_edit->setText(config.read("receiver_name").toString());
         }catch(std::runtime_error &e){
             emit(SignalBus::inst()->systemMessageEvent("load config fail"));
         }
@@ -196,5 +196,5 @@ void NetworkView::saveConfig(){
     config.insert("host_address", ui->ip_edit->text());
     config.insert("host_port", ui->port_edit->text());
     config.insert("host_password", ui->connect_password_edit->text());
-    config.insert("reciver_name", ui->name_edit->text());
+    config.insert("receiver_name", ui->name_edit->text());
 }
