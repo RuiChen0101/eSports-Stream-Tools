@@ -318,7 +318,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Clear Score</string>
+     <string>Clear Points</string>
     </property>
    </widget>
    <widget class="QPushButton" name="clear_round">

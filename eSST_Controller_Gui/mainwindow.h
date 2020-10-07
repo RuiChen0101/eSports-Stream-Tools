@@ -5,6 +5,7 @@
 #include "statusbar.h"
 
 #include "view/timer_view.h"
+#include "view/network_view.h"
 #include "view/score_board_view.h"
 
 #include <QMainWindow>

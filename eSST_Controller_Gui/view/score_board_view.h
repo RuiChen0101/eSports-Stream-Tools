@@ -3,7 +3,6 @@
 
 #include "score_board/team.h"
 #include "score_board/round.h"
-
 #include "file/config_file.h"
 
 #include <QWidget>
@@ -16,7 +15,7 @@ class ScoreBoardView : public QWidget{
     Q_OBJECT
 
 public:
-    explicit ScoreBoardView(QWidget *parent = nullptr);
+    ScoreBoardView(QWidget *parent = nullptr);
     ~ScoreBoardView();
 
 private slots:
@@ -27,7 +26,7 @@ private slots:
     void useDoubleDigitUpdate(int);
 
 private:
-    void initialize();
+    void initShareConfig();
     void registeFiles();
     void connectSignal();
     void loadConfig();

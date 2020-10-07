@@ -23,13 +23,13 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>eSports Stream Tools v1.0</string>
+   <string>eSports Stream Tools-Controller v1.1</string>
   </property>
   <property name="animated">
    <bool>true</bool>
   </property>
   <widget class="QWidget" name="main_view">
-   <layout class="QGridLayout" name="gridLayout_4">
+   <layout class="QGridLayout" name="main_layout">
     <item row="0" column="0">
      <widget class="QTabWidget" name="main_function_tab_widget">
       <property name="minimumSize">
@@ -74,6 +74,28 @@
         <string>ScoreBoard</string>
        </attribute>
        <layout class="QGridLayout" name="score_tab_layout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="network_tab">
+       <attribute name="title">
+        <string>Network</string>
+       </attribute>
+       <layout class="QGridLayout" name="network_tab_layout">
         <property name="leftMargin">
          <number>0</number>
         </property>

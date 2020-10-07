@@ -5,20 +5,24 @@ TEMPLATE = app
 
 CONFIG += c++11
 
-include(../eSST_Controller_Gui/eSST_Controller_Gui.pri)
+include(../eSST_Core/eSST_Core.pri)
 
 SOURCES +=  \
     main.cpp \
     ut_file/fake_file_source.cpp
 
 HEADERS += \
+    testcleanup.h \
     testexec.h \
-    testsetup.h \
+    testinit.h \
     ut_file/fake_file_source.h \
     ut_file/ut_config_file.h \
     ut_file/ut_file.h \
     ut_file/ut_file_manager.h \
     ut_file/ut_file_source.h \
+    ut_network/ut_tcp_client.h \
+    ut_network/ut_share_config.h \
+    ut_network/ut_tcp_server.h \
     ut_score_board/ut_point.h \
     ut_score_board/ut_round.h \
     ut_score_board/ut_team.h \
