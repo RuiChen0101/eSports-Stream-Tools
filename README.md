@@ -9,40 +9,28 @@ Develop | [![Build Status](https://travis-ci.org/RuiChen0101/eSports-Stream-Tool
 
 ## Get started
 
- - you can download eSports-Stream-Tools from [release page](https://github.com/RuiChen0101/eSports-Stream-Tools/releases)
+ - you can download the latest version from [release page](https://github.com/RuiChen0101/eSports-Stream-Tools/releases)
 
 ## Overview
- - ### Timer
-  ![Timer](assest/Timer.jpg)
+ - ### Controller
 
-   Module | Short description
-  ------------ | -------------
-  DateTime | system date and time
-  Countdown | countdown to specified time *(Live countdown. Ex. Stream live in: 0h 30m 12s)*
-  Chrono Down | countdown from value
-  Flex output | can change source from three module above
+Main interface to controll **timer**, **scoreboard** and **network connection**. Timer and score board will output content to the file for integration with **OBS**. Moreover, with Receiver connected, match info will synchronize automatically to all receiver so player can have better awareness over current match status.
 
-  **Timer format**
+for more information, visit [Controller manual](eSST_Controller_Gui/README.md)
 
-  Token | Usage
-  ------------ | -------------
-  $s | second
-  $m | minute
-  $h | hour
-  $d | day
+   Timer | Scoreboard | Network
+  ------------ | ------------- | -------------
+  ![Timer](assest/Timer.jpg) | ![Scoreboard](assest/Scoreboard.jpg) | ![Network](assest/Network.jpg)
 
- - ### Scoreboard
-  ![Scoreboard](assest/Scoreboard.jpg)
+  - ### Receiver
 
-  Function | Short description
-  ------------ | -------------
-  Clear Score | reset both team's points
-  Clear Round | reset both team's round points
-  Point+1, Round+1 | add point or round point
-  Best of N | set max round in Best of N format (max round = (N+1)/2)
-  Use digit | display round points in digit mod
-  Round format | first char represent as pending point and second as obtained point
-  Round Invert | reverse output of round point
+Receive and display current match status controled by Controller.
+
+for more information, visit [Receiver manual](eSST_Receiver_Gui/README.md)
+
+|  Info |
+| ------------ |
+| ![Receiver](assest/Receiver.jpg) |
 
 ## Reference
  - Idea inspire by [snaz](https://github.com/JimmyAppelt/Snaz)
